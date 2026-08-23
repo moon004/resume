@@ -1,0 +1,156 @@
+# 履歴書・職務経歴データ（唯一の編集対象）。
+# 文字列は そのまま書けば両言語共通、{ja: ..., en: ...} で言語別になる。
+# TODO: プレースホルダー。実データに差し替えること。
+
+profile:
+  name: { ja: "山田 太郎", en: "Taro Yamada" }
+  kana: "やまだ たろう"
+  title: { ja: "バックエンドエンジニア", en: "Backend Engineer" }
+  gender: { ja: "男", en: "Male" }
+  birthDate: "1995-04-01"
+  postalCode: "150-0002"
+  address: { ja: "東京都渋谷区渋谷2丁目21－◯　△△マンション◯◯号室", en: "2-21-X Shibuya, Shibuya-ku, Tokyo" }
+  addressKana: "とうきょうとしぶやくしぶや"
+  phone: ""
+  mobile: "090-0000-0000"
+  email: "you@example.com"
+  github: "https://github.com/moon004"
+  spouse: false
+  dependents: 0
+
+# 職務要約
+summary:
+  ja: |
+    20XX年、株式会社〇〇に入社しました。
+    入社後◯年間、主に Go / TypeScript を用いた〇〇業界向け Web アプリケーションの要件定義から実装・運用保守まで従事しております。
+    チームリーダーとして最大◯名規模のマネジメント経験、後輩教育経験がございます。
+  en: |
+    Joined Sample Inc. in 20XX. For N years I have worked on web applications for the XX industry using Go and TypeScript, from requirements through implementation and operations.
+    Experience leading a team of up to N engineers and mentoring juniors.
+
+# 得意な分野・知識・技術
+strengths:
+  - { ja: "〇〇業界の業界知識", en: "Domain knowledge of the XX industry" }
+  - { ja: "Go による Web API の設計・実装・運用", en: "Design, implementation and operation of web APIs in Go" }
+  - { ja: "チームリーダーとして最大◯名規模のマネジメント経験、後輩教育経験", en: "Team lead for up to N members; mentoring" }
+
+# テクニカルスキル（増えたら行を足すだけ）
+skills:
+  - category: OS
+    items:
+      - { name: Linux, years: 5, level: { ja: "インストールから環境構築、設定が可能", en: "Can install, configure and operate" } }
+      - { name: macOS, years: 6, level: { ja: "通常使用に問題なし", en: "Daily driver" } }
+  - category: { ja: "言語", en: "Languages" }
+    items:
+      - { name: Go, years: 4, level: { ja: "通常使用に問題なしで、指導も可能", en: "Proficient; can mentor others" } }
+      - { name: TypeScript, years: 3, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+      - { name: Python, years: 2, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
+  - category: { ja: "フレームワーク", en: "Frameworks" }
+    items:
+      - { name: Next.js, years: 2, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+      - { name: gRPC, years: 3, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+  - category: DB
+    items:
+      - { name: PostgreSQL, years: 4, level: { ja: "テーブル設計・チューニングが可能", en: "Schema design and tuning" } }
+      - { name: Redis, years: 2, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+  - category: { ja: "クラウド", en: "Cloud" }
+    items:
+      - { name: AWS, years: 3, level: { ja: "ECS / RDS / Lambda を用いた構築・運用", en: "ECS / RDS / Lambda build and ops" } }
+      - { name: GCP, years: 1, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
+  - category: { ja: "その他ミドルウェア、サーバー等", en: "Other (middleware, servers)" }
+    items:
+      - { name: Docker, years: 4, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+      - { name: Terraform, years: 2, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
+
+# 開発経歴（新しい会社は末尾に追加。to を省略すると「現在」）
+workHistory:
+  - name: { ja: "株式会社サンプル", en: "Sample Inc." }
+    period: { from: "2022-04" }
+    business: { ja: "IT人材支援事業", en: "IT staffing services" }
+    capital: { ja: "6,000万円", en: "JPY 60M" }
+    employees: { ja: "1,000名", en: "1,000" }
+    projects:
+      - title: { ja: "〇〇向け業務管理システムの開発", en: "Operations management system for XX" }
+        period: { from: "2023-04" }
+        overview:
+          ja: "〇〇業界の〇〇向け業務管理システムの新規開発"
+          en: "Greenfield development of an operations management system for XX"
+        phases:
+          - { ja: "要件定義", en: "Requirements" }
+          - { ja: "基本設計", en: "Basic design" }
+          - { ja: "詳細設計", en: "Detailed design" }
+          - { ja: "実装", en: "Implementation" }
+          - { ja: "テスト", en: "Testing" }
+          - { ja: "運用保守", en: "Operations" }
+        tasks:
+          - { ja: "〇〇機能の API の要件定義〜実装〜運用保守", en: "Requirements through operations for the XX API" }
+          - { ja: "テーブル設計・クエリチューニング", en: "Schema design and query tuning" }
+          - { ja: "ビルド、デプロイ環境構築（GitHub Actions / ECS）", en: "Build and deploy pipeline (GitHub Actions / ECS)" }
+          - { ja: "メンバーのマネジメント業務（進捗管理 / 品質管理）", en: "Team management (progress and quality)" }
+        achievements:
+          - { ja: "◯◯の課題に対し◯◯を導入し、API レイテンシを◯%改善", en: "Reduced API latency by N% by introducing XX" }
+          - { ja: "テスト自動化により、リリース頻度を週1回から日次に改善", en: "Moved from weekly to daily releases via test automation" }
+        environment:
+          os: [Linux]
+          languages: [Go, TypeScript]
+          frameworks: [gRPC, Next.js]
+          db: [PostgreSQL, Redis]
+          other: [AWS (ECS/RDS), Docker, Terraform, GitHub Actions]
+        role: { ja: "チームリーダー", en: "Team lead" }
+        teamSize: 5
+        totalSize: 20
+      - title: { ja: "既存 EC サイトの保守・機能改善", en: "Maintenance and enhancement of an existing EC site" }
+        period: { from: "2022-04", to: "2023-03" }
+        overview:
+          ja: "〇〇業界向け EC サイトの保守・機能改善"
+          en: "Maintenance and feature work on an EC site for the XX industry"
+        phases:
+          - { ja: "詳細設計", en: "Detailed design" }
+          - { ja: "実装", en: "Implementation" }
+          - { ja: "テスト", en: "Testing" }
+        tasks:
+          - { ja: "〇〇機能の画面 / API の実装・単体テスト", en: "Implemented screens and APIs for XX; unit tests" }
+          - { ja: "障害調査・障害対応", en: "Incident investigation and response" }
+        achievements:
+          - { ja: "◯◯を改善し、月次の障害件数を◯件から◯件に削減", en: "Reduced monthly incidents from N to M by improving XX" }
+        environment:
+          os: [Linux]
+          languages: [TypeScript, PHP]
+          frameworks: [Laravel, React]
+          db: [MySQL]
+          other: [AWS (EC2/RDS), Docker]
+        role: { ja: "メンバー", en: "Member" }
+        teamSize: 4
+        totalSize: 10
+
+# 取得資格等 / 免許・資格
+certifications:
+  - date: "2021-06"
+    name: { ja: "応用情報技術者試験 合格", en: "Applied Information Technology Engineer" }
+  - date: "2023-02"
+    name: { ja: "AWS Certified Solutions Architect – Associate", en: "AWS Certified Solutions Architect – Associate" }
+
+# 学歴（履歴書の「学歴」欄。入学・卒業を 1 行ずつ）
+education:
+  - date: "2014-03"
+    name: { ja: "〇〇高等学校 卒業", en: "Graduated from XX High School" }
+  - date: "2014-04"
+    name: { ja: "△△大学 △△学部△△学科 入学", en: "Entered XX University, Faculty of XX" }
+  - date: "2018-03"
+    name: { ja: "△△大学 △△学部△△学科 卒業", en: "Graduated from XX University, Faculty of XX" }
+
+# 自己PR（見出し + 本文を複数）
+selfPr:
+  - title: { ja: "課題発見と改善の推進力", en: "Drive for finding and fixing problems" }
+    body:
+      ja: "アピールポイントをひとことで→エピソードの概要→目標や取り組んだ課題→目標達成のために取り組んだこと→得られた結果や成果 の構成で記載。TODO"
+      en: "Headline → episode summary → goal or challenge → what I did → result. TODO"
+  - title: { ja: "チームで成果を出す姿勢", en: "Delivering as a team" }
+    body:
+      ja: "TODO"
+      en: "TODO"
+
+# 履歴書の備考欄
+remarks:
+  ja: "貴社の規定に従います。"
+  en: "I will follow your company's regulations."
