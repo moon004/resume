@@ -1,154 +1,623 @@
 # 履歴書・職務経歴データ（唯一の編集対象）。
 # 文字列は そのまま書けば両言語共通、{ja: ..., en: ...} で言語別になる。
-# TODO: プレースホルダー。実データに差し替えること。
+# 出典: oo-siang-hwa-resume.pdf（英語）。日本語訳は要レビュー。TODO の箇所は PDF に情報がなかった項目。
 
 profile:
-  name: { ja: "山田 太郎", en: "Taro Yamada" }
-  kana: "やまだ たろう"
-  title: { ja: "バックエンドエンジニア", en: "Backend Engineer" }
-  gender: { ja: "男", en: "Male" }
-  birthDate: "1995-04-01"
-  postalCode: "150-0002"
-  address: { ja: "東京都渋谷区渋谷2丁目21－◯　△△マンション◯◯号室", en: "2-21-X Shibuya, Shibuya-ku, Tokyo" }
-  addressKana: "とうきょうとしぶやくしぶや"
+  name: { ja: "OO SIANG HWA", en: "Oo Siang Hwa" }
+  kana: "オー シャンファ" # TODO: 履歴書のふりがな表記を確認
+  title:
+    {
+      ja: "テックリード / フルスタックエンジニア",
+      en: "Tech Lead / Full-stack Engineer",
+    }
+  # gender: { ja: "男", en: "Male" }   # TODO: 履歴書に記載する場合はコメントを外す
+  birthDate: "1994-05-06"
+  postalCode: "062-0903"
+  address: { ja: "北海道札幌市", en: "Sapporo, Hokkaido, Japan" }
+  addressKana: "ほっかいどうさっぽろし"
   phone: ""
-  mobile: "090-0000-0000"
-  email: "you@example.com"
+  mobile: "080-2563-1047" # hide this phonumber when creating documents for public facing site such as LinkedIn
+  email: "herodotus94@gmail.com"
   github: "https://github.com/moon004"
-  spouse: false
-  dependents: 0
+  linkedin: "https://www.linkedin.com/in/oo-siang-hwa-0aa584129/"
+  website: "https://gitlab.com/moon004"
 
-# 職務要約
+# 職務要約（短く、要点のみ。web / 職務経歴書で共通。> で折り返すと 1 段落になる）
 summary:
-  ja: |
-    20XX年、株式会社〇〇に入社しました。
-    入社後◯年間、主に Go / TypeScript を用いた〇〇業界向け Web アプリケーションの要件定義から実装・運用保守まで従事しております。
-    チームリーダーとして最大◯名規模のマネジメント経験、後輩教育経験がございます。
-  en: |
-    Joined Sample Inc. in 20XX. For N years I have worked on web applications for the XX industry using Go and TypeScript, from requirements through implementation and operations.
-    Experience leading a team of up to N engineers and mentoring juniors.
+  # 日本語は折り返しで空白が入るため 1 行で書く
+  ja: "2019年から Go・TypeScript を中心にフルスタックで Web プロダクトを開発してきたテックリード。顧客の課題を要件とアーキテクチャに落とし込み、5名のスクラムチームを率いてリリースまで導いてきました。現在はクリーンアーキテクチャに基づくマイクロサービスと、イベント駆動の DDD による大規模システム設計を担当しています。"
+  en: >
+    Tech Lead and full-stack engineer who has been shipping web products in Go and TypeScript since 2019.
+    Turns customer problems into requirements and architecture, and has led a five-person Scrum team from kickoff to release.
+    Currently designing large-scale systems as event-driven DDD microservices on clean architecture.
 
 # 得意な分野・知識・技術
 strengths:
-  - { ja: "〇〇業界の業界知識", en: "Domain knowledge of the XX industry" }
-  - { ja: "Go による Web API の設計・実装・運用", en: "Design, implementation and operation of web APIs in Go" }
-  - { ja: "チームリーダーとして最大◯名規模のマネジメント経験、後輩教育経験", en: "Team lead for up to N members; mentoring" }
+  - ja: "顧客のペインポイントを起点とした要件定義・システムアーキテクチャ設計"
+    en: "Requirements and system-architecture design driven by customer pain points"
+  - ja: "クリーンアーキテクチャに基づくマイクロサービス設計と、イベント駆動の DDD による大規模システムのモデリング"
+    en: "Microservice design on clean architecture, and large-system modelling with event-driven DDD"
+  - ja: "Go（Echo / sqlc）によるバックエンドと TypeScript（React / Next.js）によるフロントエンドを一貫して担当できるフルスタック開発"
+    en: "Full-stack development: Go (Echo / sqlc) backends and TypeScript (React / Next.js) frontends"
+  - ja: "フロントエンド・バックエンド双方のテスト設計と自動化（Cypress による E2E、CI 構築）"
+    en: "Test design and automation across frontend and backend (Cypress E2E, CI pipelines)"
+  - ja: "チームリーダー / テックリードとして最大5名規模のチームマネジメント（チケット駆動開発、スクラム・プランニングポーカー）と顧客折衝"
+    en: "Team leadership of up to 5 engineers (ticket-based development, Scrum planning poker) and client communication"
+  - ja: "開発者向け仕様書・ドキュメントの作成"
+    en: "Writing specifications and developer-facing documentation"
+  - ja: "多言語でのコミュニケーション（英語・中国語・マレー語・日本語・韓国語・福建語）"
+    en: "Multilingual communication (English, Mandarin, Malay, Japanese)"
 
 # テクニカルスキル（増えたら行を足すだけ）
+# years は PDF 作成時点の値 → TODO: 現在の年数に更新。level は任意（例: 通常使用に問題なし / 調べながら作業可能）
 skills:
-  - category: OS
+  # - category: OS
+  #   items:
+  #     - { name: Linux, years: 0 }   # TODO
+  - category: { ja: "アーキテクチャ・設計", en: "Architecture & Design" }
     items:
-      - { name: Linux, years: 5, level: { ja: "インストールから環境構築、設定が可能", en: "Can install, configure and operate" } }
-      - { name: macOS, years: 6, level: { ja: "通常使用に問題なし", en: "Daily driver" } }
+      - { name: { ja: "マイクロサービス", en: "Microservices" } }
+      - { name: { ja: "クリーンアーキテクチャ", en: "Clean Architecture" } }
+      - {
+          name:
+            { ja: "ドメイン駆動設計（DDD）", en: "Domain-Driven Design (DDD)" },
+        }
+      - {
+          name:
+            {
+              ja: "イベント駆動アーキテクチャ",
+              en: "Event-driven architecture",
+            },
+        }
+      - {
+          name:
+            {
+              ja: "要件定義・システム設計",
+              en: "Requirements & system design",
+            },
+        }
+  - category: { ja: "開発プロセス", en: "Practices" }
+    items:
+      - {
+          name:
+            {
+              ja: "スクラム（プランニングポーカー）",
+              en: "Scrum (planning poker)",
+            },
+        }
+      - { name: TDD }
+      - { name: { ja: "チケット駆動開発", en: "Ticket-based development" } }
+      - {
+          name:
+            {
+              ja: "テックリード / チームマネジメント",
+              en: "Tech leadership / team management",
+            },
+        }
   - category: { ja: "言語", en: "Languages" }
     items:
-      - { name: Go, years: 4, level: { ja: "通常使用に問題なしで、指導も可能", en: "Proficient; can mentor others" } }
-      - { name: TypeScript, years: 3, level: { ja: "通常使用に問題なし", en: "Proficient" } }
-      - { name: Python, years: 2, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
+      - { name: Go, years: 4 }
+      - { name: TypeScript, years: 4 }
+      - { name: JavaScript, years: 4 }
+      - { name: Java, years: 2.5 }
+      - { name: "C#", years: 2 }
+      - { name: Python, years: 2 }
   - category: { ja: "フレームワーク", en: "Frameworks" }
     items:
-      - { name: Next.js, years: 2, level: { ja: "通常使用に問題なし", en: "Proficient" } }
-      - { name: gRPC, years: 3, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+      - { name: React, years: 4 }
+      - { name: "React Native (Expo)" }
+      - { name: Next.js }
+      - { name: "Echo / sqlc (Go)" }
+      - { name: Spring Boot }
+      - { name: gRPC }
+      - { name: React-spring }
+      - { name: "Unity / Playmaker" }
   - category: DB
     items:
-      - { name: PostgreSQL, years: 4, level: { ja: "テーブル設計・チューニングが可能", en: "Schema design and tuning" } }
-      - { name: Redis, years: 2, level: { ja: "通常使用に問題なし", en: "Proficient" } }
+      - { name: PostgreSQL, years: 4 }
+      - { name: Cloud Spanner }
+      - { name: BigQuery }
+      - { name: DynamoDB }
+      - { name: "ScalarDB / ScalarDL" }
   - category: { ja: "クラウド", en: "Cloud" }
     items:
-      - { name: AWS, years: 3, level: { ja: "ECS / RDS / Lambda を用いた構築・運用", en: "ECS / RDS / Lambda build and ops" } }
-      - { name: GCP, years: 1, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
-  - category: { ja: "その他ミドルウェア、サーバー等", en: "Other (middleware, servers)" }
+      - { name: "GCP (Cloud Spanner, BigQuery, Cloud Run, GKE)" }
+      - {
+          name: "AWS (CDK, Amplify, Copilot, Lambda, DynamoDB, ECR, ECS, EC2, S3, CodeCommit)",
+        }
+  - category: { ja: "コンテナ・IaC", en: "Containers / IaC" }
     items:
-      - { name: Docker, years: 4, level: { ja: "通常使用に問題なし", en: "Proficient" } }
-      - { name: Terraform, years: 2, level: { ja: "調べながら作業可能", en: "Working knowledge" } }
+      - { name: Docker, years: 4 }
+      - { name: Kubernetes }
+      - { name: Terraform }
+      - { name: Ansible }
+  - category: { ja: "CI / 監視", en: "CI / Monitoring" }
+    items:
+      - { name: CircleCI }
+      - { name: GitLab CI }
+      - { name: GitHub Actions }
+      - { name: Dependabot }
+      - { name: Sentry.io }
+  - category: { ja: "テスト", en: "Testing" }
+    items:
+      - { name: "Cypress (E2E)" }
+  - category: { ja: "設計・管理ツール", en: "Design / Management tools" }
+    items:
+      - { name: Figma }
+      - { name: Whimsical }
+      - { name: "GitHub / GitLab" }
+      - { name: Jira }
+      - { name: Notion }
 
-# 開発経歴（新しい会社は末尾に追加。to を省略すると「現在」）
+# 開発経歴（古い順。新しい会社は末尾に追加。to を省略すると「現在」）
 workHistory:
-  - name: { ja: "株式会社サンプル", en: "Sample Inc." }
-    period: { from: "2022-04" }
-    business: { ja: "IT人材支援事業", en: "IT staffing services" }
-    capital: { ja: "6,000万円", en: "JPY 60M" }
-    employees: { ja: "1,000名", en: "1,000" }
+  - name: { ja: "株式会社INDETAIL", en: "INDETAIL Inc." }
+    period: { from: "2019-05", to: "2021-05" }
+    business:
+      {
+        ja: "ブロックチェーン・AI・IoT を活用したシステム開発（札幌）",
+        en: "Blockchain, AI and IoT systems development (Sapporo)",
+      }
     projects:
-      - title: { ja: "〇〇向け業務管理システムの開発", en: "Operations management system for XX" }
-        period: { from: "2023-04" }
+      - title:
+          {
+            ja: "DLT（分散台帳）ソフトウェア向け SDK とバックエンドシステムの開発",
+            en: "SDKs and backend systems for a client's DLT software",
+          }
+        period: { from: "2019-05", to: "2021-05" }
         overview:
-          ja: "〇〇業界の〇〇向け業務管理システムの新規開発"
-          en: "Greenfield development of an operations management system for XX"
+          ja: "クライアント企業向け DLT（分散台帳）プラットフォーム — 組み込み用 SDK とバックエンドシステム"
+          en: "DLT (distributed-ledger) platform for enterprise clients — integration SDKs and backend systems"
+        phases: # TODO: 要確認
+          - { ja: "詳細設計", en: "Detailed design" }
+          - { ja: "実装", en: "Implementation" }
+          - { ja: "テスト", en: "Testing" }
+          - { ja: "運用保守", en: "Operations" }
+        tasks:
+          - {
+              ja: "DLT ソフトウェア向けのバックエンド / フロントエンド SDK（gRPC）を設計・実装し、継続的に保守",
+              en: "Designed, built and maintained backend and frontend SDKs (gRPC) for the client's DLT software",
+            }
+          - {
+              ja: "クライアント案件のバックエンド（Java / Spring Boot）を実装し、運用を自動化",
+              en: "Implemented client backends in Java / Spring Boot and automated their operations",
+            }
+          - {
+              ja: "IoT 機器からの大量データをブロックチェーンへ ACID を保証して保存するパイプラインを実装",
+              en: "Built the pipeline that stores high-volume IoT data on the blockchain with ACID guarantees",
+            }
+          - {
+              ja: "チームリーダーとしてタスク配分などのリソース管理と、クライアントとの窓口を担当",
+              en: "Led the team as team leader — task allocation, resourcing and day-to-day communication with the client",
+            }
+          - {
+              ja: "完了プロジェクトの仕様書を作成",
+              en: "Wrote the specification documents for delivered projects",
+            }
+        environment: # TODO: 要確認
+          languages: [Java, Go]
+          frameworks: [Spring Boot, gRPC]
+          db: [ScalarDB, PostgreSQL]
+          other: [ScalarDL, Docker]
+        role: { ja: "チームリーダー", en: "Team Leader" }
+
+  - name: { ja: "株式会社イー・カムトゥルー", en: "E-ComeTrue Inc." }
+    period: { from: "2021-06", to: "2022-02" }
+    business:
+      {
+        ja: "業務効率化アプリケーションの開発・提供（札幌）",
+        en: "Business-operations applications (Sapporo)",
+      }
+    projects:
+      - title:
+          {
+            ja: "予約システムを含む大規模モノリスの保守・機能開発",
+            en: "Maintenance and feature development of a large monolith with a reservation system",
+          }
+        period: { from: "2021-06", to: "2022-02" }
+        phases: # TODO: 要確認
+          - { ja: "詳細設計", en: "Detailed design" }
+          - { ja: "実装", en: "Implementation" }
+          - { ja: "テスト", en: "Testing" }
+          - { ja: "運用保守", en: "Operations" }
+        tasks:
+          - {
+              ja: "大規模モノリスのフロントエンド・バックエンド双方に新機能を追加し、保守を担当",
+              en: "Added features to and maintained both the frontend and backend of a large monolith",
+            }
+          - {
+              ja: "既存の予約システムに Google マップ予約連携を実装",
+              en: "Integrated Google Maps booking into the existing reservation system",
+            }
+          - {
+              ja: "独自コンポーネント / hooks をモジュール化してリファクタリングし、肥大化したコードを削減",
+              en: "Refactored custom components and hooks into reusable modules, cutting down bloated code",
+            }
+          - {
+              ja: "Figma デザインをもとにアプリ画面を実装",
+              en: "Implemented app screens directly from Figma designs",
+            }
+          - {
+              ja: "新機能の実装ごとにドキュメントを整備",
+              en: "Documented each new feature after shipping it",
+            }
+        environment: # TODO: 要確認
+          languages: [TypeScript, JavaScript]
+          frameworks: [React]
+          other: [Figma]
+        role: { ja: "エンジニア", en: "Software Engineer" }
+
+  - name: { ja: "株式会社ガラパゴス", en: "Galapagos Inc." }
+    period: { from: "2022-03", to: "2024-06" }
+    business:
+      {
+        ja: "AI を活用したデザインサービス「AIR Design」の開発・提供",
+        en: "AIR Design — AI-powered design services",
+      }
+    projects:
+      - title:
+          {
+            ja: "AIR Design の新規プロダクト開発（テックリード）",
+            en: "New product development for AIR Design (Tech Lead)",
+          }
+        period: { from: "2022-03", to: "2024-06" }
+        overview:
+          ja: "AI デザインサービス「AIR Design」の新規プロダクト開発"
+          en: "Greenfield product development for AIR Design, the company's AI-powered design service"
         phases:
           - { ja: "要件定義", en: "Requirements" }
           - { ja: "基本設計", en: "Basic design" }
           - { ja: "詳細設計", en: "Detailed design" }
           - { ja: "実装", en: "Implementation" }
           - { ja: "テスト", en: "Testing" }
+        tasks:
+          - {
+              ja: "プロダクトオーナーと協働して顧客のペインポイントを特定し、システム要件全体とアーキテクチャに落とし込み",
+              en: "Worked with the product owner to pin down customer pain points and turned them into full system requirements and architecture",
+            }
+          - {
+              ja: "フロントエンド・バックエンド双方のテスト戦略を設計・構築し、システム全体の品質を担保",
+              en: "Designed and set up frontend and backend test suites to guarantee quality across the whole system",
+            }
+          - {
+              ja: "開発者が迷わず実装できる粒度のドキュメントを整備し、開発を加速",
+              en: "Wrote clear, developer-facing documentation that kept implementation unambiguous and fast",
+            }
+          - {
+              ja: "5名のチームをスクラム（プランニングポーカー）で運営",
+              en: "Ran a five-person team with Scrum and planning poker",
+            }
+          - {
+              ja: "複数の AWS CDK プロジェクトを横断してオーケストレーション",
+              en: "Orchestrated multiple AWS CDK projects across the product",
+            }
+        environment: # TODO: 要確認
+          languages: [Go, TypeScript]
+          frameworks: [Echo, sqlc, Next.js, React]
+          db: [PostgreSQL, DynamoDB]
+          other:
+            [AWS CDK, ECS, Lambda, Amplify, Copilot, GitHub Actions, Cypress]
+        role: { ja: "テックリード", en: "Tech Lead" }
+        teamSize: 5
+
+  - name: { ja: "株式会社カナリー", en: "Canary Inc." }
+    period: { from: "2024-07" }
+    business:
+      {
+        ja: "不動産テック — 部屋探しアプリ「CANARY」（掲載物件数 約600万件）と不動産仲介向け CRM「CANARY Cloud」の開発・運営",
+        en: "Real-estate tech — the CANARY rental-search app (~6M listings) and CANARY Cloud CRM for brokers",
+      }
+    projects:
+      # 出典: SSK-TBD org の merged PR 308件（server / canary-web / canary-react-native / manifests / ops）と Linear (toC / MP) のプロジェクト履歴
+      - title:
+          {
+            ja: "物件データ連携基盤の開発・運用（外部ポータル連動）",
+            en: "Property-data ingestion platform (external portal integrations)",
+          }
+        period: { from: "2024-07" }
+        overview:
+          ja: "SUUMO・LIFULL・Yahoo! 等の大手ポータルから物件データを取り込む Go マイクロサービス群（クリーンアーキテクチャ）の開発・運用"
+          en: "Built and ran the Go microservices (clean architecture) that ingest listing data from major portals such as SUUMO, LIFULL and Yahoo!"
+        phases:
+          - { ja: "要件定義", en: "Requirements" }
+          - { ja: "設計", en: "Design" }
+          - { ja: "実装", en: "Implementation" }
+          - { ja: "テスト", en: "Testing" }
           - { ja: "運用保守", en: "Operations" }
         tasks:
-          - { ja: "〇〇機能の API の要件定義〜実装〜運用保守", en: "Requirements through operations for the XX API" }
-          - { ja: "テーブル設計・クエリチューニング", en: "Schema design and query tuning" }
-          - { ja: "ビルド、デプロイ環境構築（GitHub Actions / ECS）", en: "Build and deploy pipeline (GitHub Actions / ECS)" }
-          - { ja: "メンバーのマネジメント業務（進捗管理 / 品質管理）", en: "Team management (progress and quality)" }
-        achievements:
-          - { ja: "◯◯の課題に対し◯◯を導入し、API レイテンシを◯%改善", en: "Reduced API latency by N% by introducing XX" }
-          - { ja: "テスト自動化により、リリース頻度を週1回から日次に改善", en: "Moved from weekly to daily releases via test automation" }
+          - {
+              ja: "新規ポータル連動をインターフェース定義からジョブルーター・Kubernetes CronJob・本番リリースまで一貫して主導",
+              en: "Led a new portal integration end-to-end — interface definition, job router, Kubernetes CronJobs, through to production release",
+            }
+          - {
+              ja: "クロール安定化のため Cloud Run functions（第2世代）のプロキシを Terraform でモジュール化して導入",
+              en: "Stabilised crawling by introducing a Cloud Run functions (gen 2) proxy, modularised with Terraform",
+            }
+          - {
+              ja: "ポータル横断の物件名正規化など、表示用データを整えるパイプライン処理を実装",
+              en: "Implemented pipeline steps that normalise listing data across portals, such as display building names",
+            }
+          - {
+              ja: "反響（送客）まわりの品質改善 — 外部送信する電話番号の正規化を恒久対応として設計・実装し、ボット反響のブロックも実装",
+              en: "Hardened the lead-delivery path — designed the permanent fix that normalises phone numbers sent to client systems, and blocked bot-generated inquiries",
+            }
+          - {
+              ja: "店舗情報更新やジョブ実行を Slack コマンド化し、運用を効率化",
+              en: "Turned store-data updates and job runs into Slack commands to streamline operations",
+            }
         environment:
-          os: [Linux]
-          languages: [Go, TypeScript]
-          frameworks: [gRPC, Next.js]
-          db: [PostgreSQL, Redis]
-          other: [AWS (ECS/RDS), Docker, Terraform, GitHub Actions]
-        role: { ja: "チームリーダー", en: "Team lead" }
-        teamSize: 5
-        totalSize: 20
-      - title: { ja: "既存 EC サイトの保守・機能改善", en: "Maintenance and enhancement of an existing EC site" }
-        period: { from: "2022-04", to: "2023-03" }
+          languages: [Go]
+          frameworks: [gRPC]
+          db: [Cloud Spanner, BigQuery]
+          other: [GKE (Kubernetes), Cloud Run, Terraform, GitHub Actions]
+        role: {
+            ja: "ソフトウェアエンジニア（フルスタック）",
+            en: "Software Engineer (Full-stack)",
+          } # TODO: 正式な役職に合わせて修正
+
+      - title:
+          {
+            ja: "部屋探しアプリ・Web の検索体験改善（A/B テスト駆動）",
+            en: "Search-experience improvements on the app and web, driven by A/B tests",
+          }
+        period: { from: "2025-04" }
         overview:
-          ja: "〇〇業界向け EC サイトの保守・機能改善"
-          en: "Maintenance and feature work on an EC site for the XX industry"
+          ja: "React Native アプリと Next.js Web の検索まわりを、イベント計測と A/B テストで継続的に改善"
+          en: "Continuously improved search on the React Native app and Next.js web with event instrumentation and A/B testing"
         phases:
-          - { ja: "詳細設計", en: "Detailed design" }
+          - { ja: "要件定義", en: "Requirements" }
+          - { ja: "設計", en: "Design" }
           - { ja: "実装", en: "Implementation" }
           - { ja: "テスト", en: "Testing" }
         tasks:
-          - { ja: "〇〇機能の画面 / API の実装・単体テスト", en: "Implemented screens and APIs for XX; unit tests" }
-          - { ja: "障害調査・障害対応", en: "Incident investigation and response" }
-        achievements:
-          - { ja: "◯◯を改善し、月次の障害件数を◯件から◯件に削減", en: "Reduced monthly incidents from N to M by improving XX" }
+          - {
+              ja: "「人気の駅」機能をバックエンド（geo サービスの usecase / adapter / repository 層）からゲートウェイ API・アプリ UI まで単独で設計・実装し、A/B テストで Variation 採用",
+              en: "Built the popular-stations feature single-handedly from the geo microservice (usecase / adapter / repository layers) through the gateway API to the app UI; its A/B variation was adopted",
+            }
+          - {
+              ja: "市区町村名フィルター、検索条件の緩和提案、イチオシ物件ソート、物件画像ギャラリー刷新、駅口コミ表示など 10 以上の施策を A/B テスト付きで実装",
+              en: "Shipped 10+ A/B-tested features including city-name filters, relaxed-search suggestions, recommended-listing sort, an image-gallery revamp and station reviews",
+            }
+          - {
+              ja: "Web の検索条件 URL を再設計（全条件のハッシュ化）し、保存済み検索条件機能を API からデータ接続まで実装",
+              en: "Redesigned the web search-condition URLs (moving all conditions into the hash) and built the saved-search feature from API to data wiring",
+            }
+          - {
+              ja: "ディープリンク（ユニバーサルリンク）対応を iOS / Android のドメイン認識設定から実装",
+              en: "Implemented deep linking (universal links), including the iOS / Android domain-association setup",
+            }
+          - {
+              ja: "GTM / Firebase のイベント設計・埋め込みで効果検証を可能にし、採用judgeまで運用",
+              en: "Designed and embedded GTM / Firebase events so every experiment could be measured through to its adoption decision",
+            }
         environment:
-          os: [Linux]
-          languages: [TypeScript, PHP]
-          frameworks: [Laravel, React]
-          db: [MySQL]
-          other: [AWS (EC2/RDS), Docker]
-        role: { ja: "メンバー", en: "Member" }
-        teamSize: 4
-        totalSize: 10
+          languages: [TypeScript, Go]
+          frameworks: [React Native (Expo), Next.js, React]
+          other: [Firebase, GTM, A/B testing]
+        role:
+          {
+            ja: "ソフトウェアエンジニア（フルスタック）",
+            en: "Software Engineer (Full-stack)",
+          }
+
+      - title:
+          {
+            ja: "Web の SEO・パフォーマンス改善",
+            en: "SEO and performance improvements on the web product",
+          }
+        period: { from: "2025-08" }
+        overview:
+          ja: "検索流入拡大のためのサイトマップ基盤整備と、物件一覧ページの Core Web Vitals 改善"
+          en: "Sitemap infrastructure for organic-search growth, plus Core Web Vitals work on the listing page"
+        tasks:
+          - {
+              ja: "市区町村・駅単位の大規模サイトマップ生成を実装し、参照データを BigQuery から Cloud Spanner へ移行",
+              en: "Built large-scale sitemap generation by city and station, migrating its data source from BigQuery to Cloud Spanner",
+            }
+          - {
+              ja: "サイトマップの variation / control 構造を設計して SEO の A/B 検証を可能にした",
+              en: "Designed a variation / control sitemap structure that made SEO A/B experiments possible",
+            }
+          - {
+              ja: "物件一覧ページの INP を startTransition の適用などで改善",
+              en: "Improved INP on the listing page, e.g. by applying startTransition",
+            }
+          - {
+              ja: "単一駅・市区町村の検索を物件一覧ページへ直接遷移させるなど、SEO ランディングの導線を改善",
+              en: "Improved SEO landing flows, e.g. routing single-station / single-city searches straight to listing pages",
+            }
+        environment:
+          languages: [TypeScript, Go]
+          frameworks: [Next.js]
+          db: [Cloud Spanner, BigQuery]
+        role:
+          {
+            ja: "ソフトウェアエンジニア（フルスタック）",
+            en: "Software Engineer (Full-stack)",
+          }
+
+      - title:
+          {
+            ja: "開発体制・開発者体験の改善",
+            en: "Engineering-process and developer-experience improvements",
+          }
+        period: { from: "2026-02" }
+        overview:
+          ja: "「リリースサイクルを上げる」チーム目標のリーダーとして、開発体制の標準化を推進"
+          en: "Led the team goal of standardising the development process to raise release velocity"
+        tasks:
+          - {
+              ja: "Marketplace 関連リポジトリのモノレポ統合と、それに伴うドキュメント・CODEOWNERS の再整備を主導",
+              en: "Drove the consolidation of the Marketplace repositories into a monorepo, reworking docs and CODEOWNERS along the way",
+            }
+          - {
+              ja: "PR レビューを toC / toB サブチーム体制へ移行する運用ルール（ODR）を策定",
+              en: "Authored the operating rule (ODR) that moved PR reviews to a toC / toB sub-team structure",
+            }
+          - {
+              ja: "ADR による設計合意プロセスを実践し、社内用語辞典など開発ドキュメントを整備",
+              en: "Practised ADR-based design decisions and curated internal engineering docs such as the company glossary",
+            }
+          - {
+              ja: "Figma デザインと実装の差分を自動チェックする AI スキルなど、AI を使った開発支援ツールを整備",
+              en: "Built AI-assisted developer tooling, such as a skill that automatically compares implementations against Figma designs",
+            }
+        environment:
+          other: [GitHub Actions, ADR, AI tooling (Claude Code)]
+        role:
+          { ja: "リーダー（開発体制改善）", en: "Lead, process improvement" }
+
+# 個人開発・その他活動（職務経歴書の「開発経歴」の後、web の Side Projects に出力）
+sideProjects:
+  - title:
+      {
+        ja: "自主事業: 人手不足と労働力を結ぶマッチングサービス（単独創業）",
+        en: "Solo startup bridging the gap between workload and workforce",
+      }
+    period: { from: "2020-06", to: "2021-09" }
+    tasks:
+      - {
+          ja: "Go によるマイクロサービス（認証、画像ホスティング / 処理、WebSocket）を TDD で開発",
+          en: "TDD backend development in Go (microservices: authentication, image hosting/handling, WebSocket)",
+        }
+      - {
+          ja: "Docker でのデプロイと Kubernetes によるオーケストレーション",
+          en: "Docker deployment with Kubernetes orchestration",
+        }
+      - {
+          ja: "SEO を重視した Next.js（TypeScript）フロントエンド、React-spring によるレスポンシブ UI",
+          en: "Next.js (TypeScript) frontend with a focus on SEO; React-spring for a responsive app",
+        }
+      - {
+          ja: "Let's Encrypt / certbot による HTTPS 化、nginx をロードバランサとしたサーバー構築と独自ドメイン設定",
+          en: "HTTPS (Let's Encrypt / certbot), nginx as load balancer, custom domain",
+        }
+    environment:
+      languages: [Go, TypeScript]
+      frameworks: [Next.js, React-spring]
+      other: [Docker, Kubernetes, nginx, Let's Encrypt]
+    role: { ja: "創業者 / フルスタック", en: "Founder / Full-stack" }
+
+  - title:
+      {
+        ja: "音楽ストリーミング PWA「YouDeez」",
+        en: "Production-ready music streaming PWA, YouDeez",
+      }
+    url: "https://github.com/moon004/Go-deezer-downloader"
+    tasks:
+      - {
+          ja: "暗号化されたプレミアム楽曲 URL の暗号化 / 復号を含むフルスタック開発",
+          en: "Built the full stack, including URL encryption/decryption of encrypted premium music",
+        }
+      - {
+          ja: "OSS プロジェクトへのコントリビューション",
+          en: "Contributed to open-source projects and the GitHub community",
+        }
+      - {
+          ja: "AWS EC2 / S3 でのホスティング、CircleCI による CI",
+          en: "Hosted on AWS EC2 / S3; continuous integration with CircleCI",
+        }
+    environment:
+      languages: [Go, JavaScript]
+      other: [AWS EC2, AWS S3, CircleCI]
+
+  - title:
+      {
+        ja: "2D プラットフォーマーのインディーゲーム「The Little Stellar」",
+        en: "2D platformer indie game, The Little Stellar",
+      }
+    url: "https://twitter.com/Stayker_Studio"
+    period: { from: "2022" } # TODO: 継続中でなければ to を記入
+    tasks:
+      - {
+          ja: "プログラミング全体とゲームメカニクスの設計・実装を担当（Unity / Playmaker）",
+          en: "In charge of all programming and game mechanics (Unity / Playmaker)",
+        }
+      - {
+          ja: "SNS を中心としたマーケティング（SEM）に参画",
+          en: "Involved in marketing, especially SEM on social media",
+        }
+    environment:
+      languages: ["C#"]
+      frameworks: [Unity, Playmaker]
+
+  - title:
+      {
+        ja: "インディーモバイルゲーム開発（個人）",
+        en: "Independent mobile game developer",
+      }
+    url: "https://www.youtube.com/watch?v=OI98BV9LcC8"
+    period: { from: "2018", to: "2019" }
+    overview:
+      {
+        ja: "2年以上にわたりモバイルゲームを個人開発・リリース（トレーラーは URL 参照）",
+        en: "2+ years developing and releasing mobile games (trailer at the URL)",
+      }
+
+  - title:
+      {
+        ja: "小切手の手書き数字認識システム",
+        en: "Handwritten digit recognition for cheques",
+      }
+    url: "https://github.com/moon004/Handwritten-Recognition-AI-Method"
+    tasks:
+      - {
+          ja: "MNIST データセットを用いて自作モデルを設計・学習",
+          en: "Self-designed and self-trained model on the MNIST handwritten digit database",
+        }
+      - {
+          ja: "Android Studio でアプリ化",
+          en: "Built an Android app with Android Studio",
+        }
+    environment:
+      languages: [Python, Java]
+      other: [MNIST, Android Studio]
+
+  - title:
+      {
+        ja: "LSTM によるローカル宝くじシステムの偏り検証",
+        en: "LSTM model to assess the bias of a local jackpot system",
+      }
+    period: { from: "2019", to: "2019" }
+    tasks:
+      - {
+          ja: "過去の当選番号をスクレイピングし LSTM モデルに入力、損失を観察して偏りを検証",
+          en: "Scraped past winning numbers, fed them to an LSTM model and evaluated the loss",
+        }
+    environment:
+      languages: [Python]
 
 # 取得資格等 / 免許・資格
-certifications:
-  - date: "2021-06"
-    name: { ja: "応用情報技術者試験 合格", en: "Applied Information Technology Engineer" }
-  - date: "2023-02"
-    name: { ja: "AWS Certified Solutions Architect – Associate", en: "AWS Certified Solutions Architect – Associate" }
+# certifications:
+#   - date: "20XX-XX"
+#     name: { ja: "TODO", en: "TODO" }
 
 # 学歴（履歴書の「学歴」欄。入学・卒業を 1 行ずつ）
-education:
-  - date: "2014-03"
-    name: { ja: "〇〇高等学校 卒業", en: "Graduated from XX High School" }
-  - date: "2014-04"
-    name: { ja: "△△大学 △△学部△△学科 入学", en: "Entered XX University, Faculty of XX" }
-  - date: "2018-03"
-    name: { ja: "△△大学 △△学部△△学科 卒業", en: "Graduated from XX University, Faculty of XX" }
+# TODO: PDF には「Electrical and Electronics Engineering」のみ。学校名・年月を記入
+# education:
+#   - date: "20XX-XX"
+#     name: { ja: "○○大学 電気電子工学科 入学", en: "Entered XX University, Electrical and Electronics Engineering" }
+#   - date: "20XX-XX"
+#     name: { ja: "○○大学 電気電子工学科 卒業", en: "B.Eng. in Electrical and Electronics Engineering, XX University" }
 
-# 自己PR（見出し + 本文を複数）
+# 自己PR（見出し + 本文を複数）TODO: PDF の事実から構成した下書き。要レビュー
 selfPr:
-  - title: { ja: "課題発見と改善の推進力", en: "Drive for finding and fixing problems" }
+  - title:
+      {
+        ja: "顧客の課題を起点に、要件からアーキテクチャまで描ける",
+        en: "From customer pain points to architecture",
+      }
     body:
-      ja: "アピールポイントをひとことで→エピソードの概要→目標や取り組んだ課題→目標達成のために取り組んだこと→得られた結果や成果 の構成で記載。TODO"
-      en: "Headline → episode summary → goal or challenge → what I did → result. TODO"
-  - title: { ja: "チームで成果を出す姿勢", en: "Delivering as a team" }
+      ja: "テックリードとしてプロダクトオーナーと協働し、顧客のペインポイントを特定したうえでシステム要件全体とアーキテクチャを策定してきました。要件を開発者が迷わず実装できる粒度のドキュメントに落とし込み、フロントエンド・バックエンド双方のテストを設計・整備することで、品質を担保しながらプロジェクトを完遂まで導いています。"
+      en: "As Tech Lead I work with the product owner to identify customers' pain points, then draft the full system requirements and architecture. I translate them into documentation developers can act on without ambiguity, and design and set up frontend and backend tests so that projects reach production with their quality assured."
+  - title: { ja: "チームを機能させるマネジメント", en: "Making teams work" }
     body:
-      ja: "TODO"
-      en: "TODO"
+      ja: "チームリーダーとしてタスク割り当てなどのリソース管理とクライアントとのコミュニケーションを担い、現在は5名のチームをスクラム（プランニングポーカー）とチケット駆動開発で運営しています。複数の AWS CDK プロジェクトの並行オーケストレーションなど、チーム横断の調整も担当しています。"
+      en: "I have managed team resources and client communication as a team leader, and currently run a team of five with Scrum planning poker and ticket-based development, including orchestrating multiple AWS CDK projects in parallel."
+  - title: { ja: "自走して作り切る力", en: "Self-driven builder" }
+    body:
+      ja: "業務外でも、単独創業したスタートアップで Go のマイクロサービスと Next.js フロントエンドを TDD で構築し、Kubernetes へデプロイした経験や、音楽ストリーミング PWA・インディーゲーム・機械学習モデルの個人開発など、アイデアをプロダクトとして完成させてきました。"
+      en: "Outside work I have taken ideas all the way to shipped products: a solo startup built with TDD on Go microservices and a Next.js frontend deployed to Kubernetes, a music-streaming PWA, indie games, and machine-learning side projects."
 
 # 履歴書の備考欄
 remarks:

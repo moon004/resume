@@ -1,55 +1,39 @@
 import { esc, escMultiline } from "../html.js";
-import { formatDuration, formatMonth, formatPeriod, getLabels } from "../labels.js";
-import type { Lang, LocalizedProject, LocalizedResume } from "../types.js";
+import { formatPeriod, getLabels } from "../labels.js";
+import type { Lang, LocalizedCompany, LocalizedResume } from "../types.js";
 
-// 閲覧用の 1 ページ HTML（画面向け、印刷にも対応）
+// 閲覧・配布用の A4 レジュメ（最大 2 ページ想定）。
+// 構成は Summary / Expertise / Experience のみ。個人開発・資格・学歴・自己PR は出力しない。
+// レイアウトは単一カラムの定番（Jake's Resume / Harvard 形式）をベースに、控えめなアクセントカラーで整える。
+
+const FONT = '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "Hiragino Sans", "Noto Sans JP", Arial, sans-serif';
 
 export function renderWeb(r: LocalizedResume, lang: Lang): string {
   const L = getLabels(lang);
   const p = r.profile;
   const other: Lang = lang === "ja" ? "en" : "ja";
 
+  const link = (url: string, label: string) => `<a href="${esc(url)}">${esc(label)}</a>`;
   const contacts = [
-    p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : "",
-    p.github ? `<a href="${esc(p.github)}">${esc(p.github.replace(/^https?:\/\//, ""))}</a>` : "",
-    p.website ? `<a href="${esc(p.website)}">${esc(p.website.replace(/^https?:\/\//, ""))}</a>` : "",
-    p.address ? `<span>${esc(p.address)}</span>` : "",
+    p.address ? esc(p.address) : "",
+    p.mobile || p.phone ? esc(p.mobile || p.phone) : "",
+    p.email ? link(`mailto:${p.email}`, p.email) : "",
+    p.linkedin ? link(p.linkedin, "LinkedIn") : "",
+    p.github ? link(p.github, p.github.replace(/^https?:\/\/(www\.)?/, "")) : "",
   ].filter(Boolean);
 
-  const skills = r.skills
+  const expertise = r.skills
     .map(
       (cat) => `
-      <div class="skill-row">
-        <div class="skill-cat">${esc(cat.category)}</div>
-        <div class="chips">${cat.items
-          .map(
-            (it) =>
-              `<span class="chip" title="${esc(it.level)}">${esc(it.name)}${it.years !== undefined ? `<b>${it.years}${lang === "ja" ? "年" : "y"}</b>` : ""}</span>`,
-          )
-          .join("")}</div>
+      <div class="row">
+        <div class="row-label">${esc(cat.category)}</div>
+        <div class="row-body">${cat.items.map((it) => esc(it.name)).join(", ")}</div>
       </div>`,
     )
     .join("");
 
-  const companies = r.workHistory
-    .map(
-      (c) => `
-      <article class="company">
-        <header>
-          <h3>${esc(c.name)}</h3>
-          <div class="muted">${formatPeriod(c.period, lang)} · ${formatDuration(c.period, lang)}${c.business ? ` · ${esc(c.business)}` : ""}</div>
-        </header>
-        ${c.projects.map((pj) => renderProject(pj, lang)).join("")}
-      </article>`,
-    )
-    .join("");
-
-  const simpleList = (items: { date: string; name: string }[] | undefined, title: string) =>
-    items?.length
-      ? `<section><h2>${title}</h2><dl class="dates">${items
-          .map((i) => `<dt>${formatMonth(i.date, lang)}</dt><dd>${esc(i.name)}</dd>`)
-          .join("")}</dl></section>`
-      : "";
+  // 新しい会社が上に来るよう逆順で出力
+  const experience = [...r.workHistory].reverse().map((c) => renderCompany(c, lang)).join("");
 
   return `<!doctype html>
 <html lang="${lang}">
@@ -58,122 +42,123 @@ export function renderWeb(r: LocalizedResume, lang: Lang): string {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(p.name)}${p.title ? ` — ${esc(p.title)}` : ""}</title>
 <style>
-  :root {
-    --bg: #fbfbf9; --fg: #1d1d1b; --muted: #6b6b66; --line: #e4e4df;
-    --accent: #1f5f8b; --chip: #eef2f5; --card: #ffffff;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #141416; --fg: #ececea; --muted: #9a9a94; --line: #2b2b2f; --accent: #7fb4dc; --chip: #1f2227; --card: #1a1a1d; }
-  }
+  @page { size: A4 portrait; margin: 15mm 16mm 16mm; }
+  :root { --fg: #1a1a1a; --muted: #5f6368; --line: #d9d9d6; --accent: #1f5f8b; }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0; background: var(--bg); color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
-    font-size: 15px; line-height: 1.7;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
-  .top { display: flex; justify-content: flex-end; font-size: 13px; margin-bottom: 8px; }
-  header.hero { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
-  header.hero h1 { font-size: 34px; margin: 0; letter-spacing: 0.01em; line-height: 1.2; }
-  header.hero .kana { color: var(--muted); font-size: 14px; margin-top: 2px; }
-  header.hero .role { font-size: 17px; color: var(--accent); margin: 8px 0 0; }
-  .contacts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 14px; color: var(--muted); }
-  section { margin-bottom: 36px; }
+  html, body { margin: 0; }
+  body { background: #ececea; color: var(--fg); font-family: ${FONT}; font-size: 9.6pt; line-height: 1.45; }
+  a { color: inherit; text-decoration: none; }
+  .top { width: 210mm; margin: 18px auto -6px; display: flex; justify-content: flex-end; font-size: 12px; }
+  .top a { color: var(--accent); }
+  .sheet { width: 210mm; min-height: 297mm; margin: 12px auto 32px; padding: 15mm 16mm 16mm; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.12); }
+
+  header { text-align: center; padding-bottom: 8px; }
+  h1 { font-size: 21pt; font-weight: 700; letter-spacing: .02em; margin: 0; line-height: 1.15; }
+  .title { color: var(--accent); font-size: 10.5pt; font-weight: 500; margin-top: 3px; }
+  .contacts { color: var(--muted); font-size: 8.8pt; margin-top: 5px; }
+  .contacts span + span::before { content: "  ·  "; white-space: pre; }
+  .contacts a { color: var(--muted); }
+
+  section { margin-top: 11px; }
   h2 {
-    font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
-    margin: 0 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+    font-size: 9.6pt; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+    margin: 0 0 6px; padding-bottom: 3px; border-bottom: 1.2px solid var(--fg);
   }
-  h3 { font-size: 19px; margin: 0; }
-  .muted { color: var(--muted); font-size: 13.5px; }
-  p { margin: 0 0 10px; }
-  ul { margin: 6px 0 0; padding-left: 1.2em; }
-  li { margin: 2px 0; }
-  .strengths li { margin: 4px 0; }
-  .skill-row { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); align-items: baseline; }
-  .skill-row:last-child { border-bottom: none; }
-  .skill-cat { font-weight: 600; font-size: 14px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { background: var(--chip); border-radius: 999px; padding: 2px 11px; font-size: 13.5px; white-space: nowrap; }
-  .chip b { font-weight: 500; color: var(--muted); margin-left: 5px; font-size: 12px; }
-  .company { margin-bottom: 28px; }
-  .company > header { margin-bottom: 10px; }
-  .project {
-    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-    padding: 16px 18px; margin: 10px 0 0;
-  }
-  .project h4 { margin: 0; font-size: 16px; }
-  .project .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 2px 0 8px; font-size: 13px; color: var(--muted); }
-  .project .label { font-weight: 600; font-size: 13px; margin-top: 8px; color: var(--fg); }
-  .tech { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-  .tech span { font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; color: var(--muted); }
-  dl.dates { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; margin: 0; }
-  dl.dates dt { color: var(--muted); font-variant-numeric: tabular-nums; }
-  dl.dates dd { margin: 0; }
-  .pr h3 { font-size: 16px; margin: 12px 0 4px; }
-  @media (max-width: 600px) { .skill-row { grid-template-columns: 1fr; gap: 4px; } header.hero h1 { font-size: 28px; } }
+  html[lang="ja"] h2 { letter-spacing: .25em; }
+  p { margin: 0; }
+  .summary { font-size: 9.8pt; }
+
+  .row { display: grid; grid-template-columns: 42mm 1fr; gap: 0 8px; padding: 1.6px 0; }
+  .row-label { font-weight: 600; }
+  .row-body { color: var(--fg); }
+
+  .company { margin-top: 9px; break-inside: avoid-page; }
+  .company:first-of-type { margin-top: 0; }
+  .line { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .company-name { font-size: 10.6pt; font-weight: 700; }
+  .period { color: var(--muted); font-size: 9pt; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .role { font-style: italic; font-weight: 500; }
+  .business { color: var(--muted); font-size: 8.8pt; text-align: right; }
+  .project { margin-top: 4px; break-inside: avoid-page; }
+  .project-title { font-weight: 600; font-size: 9.6pt; }
+  .overview { color: var(--muted); font-size: 9.2pt; margin: 1px 0 2px; }
+  ul { margin: 2px 0 0; padding-left: 14px; }
+  li { margin: 1.2px 0; padding-left: 2px; }
+  li::marker { color: var(--muted); }
+  .tech { color: var(--muted); font-size: 8.6pt; margin-top: 3px; }
+  .tech b { font-weight: 600; color: var(--fg); }
+
   @media print {
-    body { background: #fff; color: #000; font-size: 11pt; }
-    .wrap { max-width: none; padding: 0; }
+    body { background: #fff; }
     .top { display: none; }
-    .project { break-inside: avoid; border-color: #bbb; }
+    .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
     a { color: inherit; }
+  }
+  @media screen and (max-width: 820px) {
+    .sheet, .top { width: auto; margin-left: 0; margin-right: 0; }
+    .sheet { padding: 20px 16px; }
+    .line { flex-wrap: wrap; }
+    .business { text-align: left; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top"><a href="web-${other}.html">${other === "ja" ? "日本語" : "English"}</a></div>
-
-  <header class="hero">
+<div class="top"><a href="web-${other}.html">${other === "ja" ? "日本語" : "English"}</a></div>
+<div class="sheet">
+  <header>
     <h1>${esc(p.name)}</h1>
-    ${p.kana && lang === "ja" ? `<div class="kana">${esc(p.kana)}</div>` : ""}
-    ${p.title ? `<p class="role">${esc(p.title)}</p>` : ""}
-    ${contacts.length ? `<div class="contacts">${contacts.join("")}</div>` : ""}
+    ${p.title ? `<div class="title">${esc(p.title)}</div>` : ""}
+    ${contacts.length ? `<div class="contacts">${contacts.map((c) => `<span>${c}</span>`).join("")}</div>` : ""}
   </header>
 
-  ${r.summary ? `<section><h2>${L.summary}</h2><p>${escMultiline(r.summary)}</p></section>` : ""}
+  ${r.summary ? `<section><h2>${L.summary}</h2><p class="summary">${escMultiline(r.summary.trim())}</p></section>` : ""}
 
-  ${r.strengths?.length ? `<section><h2>${L.strengths}</h2><ul class="strengths">${r.strengths.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></section>` : ""}
+  <section><h2>${L.expertise}</h2>${expertise}</section>
 
-  <section><h2>${L.skills}</h2>${skills}</section>
-
-  <section><h2>${L.workHistory}</h2>${companies}</section>
-
-  ${simpleList(r.certifications, L.certifications)}
-  ${simpleList(r.education, L.education)}
-
-  ${
-    r.selfPr?.length
-      ? `<section class="pr"><h2>${L.selfPr}</h2>${r.selfPr.map((s) => `<h3>${esc(s.title)}</h3><p>${escMultiline(s.body)}</p>`).join("")}</section>`
-      : ""
-  }
+  <section><h2>${L.experience}</h2>${experience}</section>
 </div>
 </body>
 </html>`;
 }
 
-function renderProject(pj: LocalizedProject, lang: Lang): string {
+function renderCompany(c: LocalizedCompany, lang: Lang): string {
   const L = getLabels(lang);
-  const env = pj.environment ?? {};
-  const tech = [...(env.languages ?? []), ...(env.frameworks ?? []), ...(env.db ?? []), ...(env.other ?? []), ...(env.os ?? [])];
-  const meta = [
-    pj.period ? `${formatPeriod(pj.period, lang)} (${formatDuration(pj.period, lang)})` : "",
-    pj.role ? `${L.role}: ${esc(pj.role)}` : "",
-    pj.teamSize ? `${L.team}: ${pj.teamSize}${L.people}` : "",
-    pj.totalSize ? `${L.total}: ${pj.totalSize}${L.people}` : "",
-  ].filter(Boolean);
+  const roles = [...new Set(c.projects.map((p) => p.role).filter(Boolean))].join(" / ");
+  const multi = c.projects.length > 1;
+
+  // 会社単位で使用技術をまとめる（重複除去、出現順）
+  const tech = [
+    ...new Set(
+      c.projects.flatMap((p) => {
+        const e = p.environment ?? {};
+        return [...(e.languages ?? []), ...(e.frameworks ?? []), ...(e.db ?? []), ...(e.other ?? []), ...(e.os ?? [])];
+      }),
+    ),
+  ];
+
+  const projects = c.projects
+    .map((p) => {
+      const bullets = [...(p.tasks ?? []), ...(p.achievements ?? [])];
+      return `
+      <div class="project">
+        ${multi ? `<div class="line"><div class="project-title">${esc(p.title)}</div>${p.period ? `<div class="period">${formatPeriod(p.period, lang)}</div>` : ""}</div>` : ""}
+        ${p.overview ? `<div class="overview">${esc(p.overview)}</div>` : ""}
+        ${bullets.length ? `<ul>${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
+      </div>`;
+    })
+    .join("");
 
   return `
-        <div class="project">
-          <h4>${esc(pj.title)}</h4>
-          ${meta.length ? `<div class="meta">${meta.map((m) => `<span>${m}</span>`).join("")}</div>` : ""}
-          ${pj.overview ? `<p>${escMultiline(pj.overview)}</p>` : ""}
-          ${pj.phases?.length ? `<div class="label">${L.phases}</div><div class="muted">${pj.phases.map(esc).join(" / ")}</div>` : ""}
-          ${pj.tasks?.length ? `<div class="label">${L.tasks}</div><ul>${pj.tasks.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
-          ${pj.achievements?.length ? `<div class="label">${L.achievements}</div><ul>${pj.achievements.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
-          ${tech.length ? `<div class="tech">${tech.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
-        </div>`;
+    <div class="company">
+      <div class="line">
+        <div class="company-name">${esc(c.name)}</div>
+        <div class="period">${formatPeriod(c.period, lang)}</div>
+      </div>
+      <div class="line">
+        <div class="role">${esc(roles)}</div>
+        ${c.business ? `<div class="business">${esc(c.business)}</div>` : ""}
+      </div>
+      ${projects}
+      ${tech.length ? `<div class="tech"><b>${L.tech}:</b> ${esc(tech.join(", "))}</div>` : ""}
+    </div>`;
 }

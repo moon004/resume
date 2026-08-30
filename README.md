@@ -15,7 +15,7 @@ npm run build -- --doc web --format html
 | ----------- | ------------------------------------------------------------ | ------ | ----- | ------ |
 | `shokumu`   | 職務経歴書 — Levtech engineer format (A4 portrait)              | ✓      | ✓     | ✓ (structured sheet) |
 | `rirekisho` | 履歴書 — Levtech Excel format (A4 landscape)                   | ✓      | ✓     | ✓ (fills `templates/rirekisho.xlsx`) |
-| `web`       | Readable one-page HTML for sharing / browsing                | ✓      | ✓     | –      |
+| `web`       | A4 résumé (Summary · Expertise · Experience), single-column  | ✓      | ✓     | –      |
 
 `--lang ja,en` (default both). Output files: `out/<doc>-<lang>.<ext>`.
 

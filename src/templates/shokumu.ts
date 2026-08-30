@@ -18,7 +18,7 @@ export function renderShokumu(r: LocalizedResume, lang: Lang): string {
   const tlRows = r.workHistory.flatMap((c) => companyRows(c, lang));
   const timeline = [
     ...tlRows.map(
-      (row) => `<div class="tl"><span class="tl-date">${formatMonth(`${row.year}-${row.month ?? ""}`, lang)}</span>${esc(row.text)}</div>`,
+      (row) => `<div class="tl"><span class="tl-date">${formatMonth(row.raw ?? "", lang)}</span>${esc(row.text)}</div>`,
     ),
     r.workHistory.some((c) => !c.period.to) ? `<div class="tl"><span class="tl-date"></span>${L.toPresent}</div>` : "",
   ].join("");
@@ -40,6 +40,15 @@ export function renderShokumu(r: LocalizedResume, lang: Lang): string {
     .join("");
 
   const companies = r.workHistory.map((c) => renderCompany(c, lang)).join("");
+
+  const sideProjects = r.sideProjects?.length
+    ? `<h2>■　${L.sideProjects}</h2>
+       <table class="projects">
+         <colgroup><col class="period"><col><col class="env"><col class="role"></colgroup>
+         <tr><th>${L.period}</th><th>${L.projectAndTasks}</th><th>${L.environment}</th><th>${L.roleScale}</th></tr>
+         ${r.sideProjects.map((p) => renderProject(p, lang)).join("")}
+       </table>`
+    : "";
 
   const certs = r.certifications?.length
     ? `<h2>■　${L.certifications}</h2>
@@ -78,20 +87,24 @@ export function renderShokumu(r: LocalizedResume, lang: Lang): string {
   table th { background: #e8e8e8; font-weight: 600; text-align: center; }
   table.skills th:first-child { width: 18%; text-align: center; vertical-align: middle; }
   table.skills td.num { width: 11%; text-align: center; white-space: nowrap; }
+  table.skills th:last-child { width: 38%; }
   table.certs, table.certs td { border: none; }
   table.certs td.date { width: 9em; }
   .company { margin-top: 10px; }
   h2, .company-head, .company-meta { break-after: avoid; }
+  caption { text-align: left; caption-side: top; break-after: avoid; }
   .company-head { font-weight: 600; text-decoration: underline; margin: 0 0 1px; }
   .company-meta { margin: 0 0 4px 1em; }
   table.projects col.period { width: 11%; }
   table.projects col.env { width: 20%; }
   table.projects col.role { width: 17%; }
-  table.projects tr { page-break-inside: avoid; }
+  table.projects tr { break-inside: avoid; }
+  table.projects thead { display: table-header-group; break-after: avoid; }
   .pj-period { text-align: center; }
   .pj-title { font-weight: 700; }
   .tag { font-weight: 600; }
   .note { font-size: 8.5pt; margin-top: 2px; }
+  .small { font-size: 8.5pt; color: #333; }
   .end { text-align: right; margin-top: 14px; }
   .closing { margin-top: 6px; }
 </style>
@@ -118,6 +131,7 @@ export function renderShokumu(r: LocalizedResume, lang: Lang): string {
   ${companies}
   <p class="note">${L.excerptNote}</p>
 
+  ${sideProjects}
   ${certs}
   ${selfPr}
 
@@ -137,14 +151,16 @@ function renderCompany(c: LocalizedCompany, lang: Lang): string {
 
   return `
   <div class="company">
-    <p class="company-head">${esc(c.name)}　（${L.employmentPeriod}：${formatPeriod(c.period, lang)}）</p>
-    ${meta.length ? `<p class="company-meta">${meta.join("　")}</p>` : ""}
     <table class="projects">
+      <caption>
+        <p class="company-head">${esc(c.name)}　（${L.employmentPeriod}：${formatPeriod(c.period, lang)}）</p>
+        ${meta.length ? `<p class="company-meta">${meta.join("　")}</p>` : ""}
+      </caption>
       <colgroup><col class="period"><col><col class="env"><col class="role"></colgroup>
-      <tr>
+      <thead><tr>
         <th>${L.period}</th><th>${L.projectAndTasks}</th><th>${L.environment}</th><th>${L.roleScale}</th>
-      </tr>
-      ${c.projects.map((p) => renderProject(p, lang)).join("")}
+      </tr></thead>
+      <tbody>${c.projects.map((p) => renderProject(p, lang)).join("")}</tbody>
     </table>
   </div>`;
 }
@@ -156,7 +172,7 @@ function renderProject(p: LocalizedProject, lang: Lang): string {
     items?.length ? `<div><span class="tag">【${label}】</span><br>${esc(items.join(", "))}</div>` : "";
 
   const period = p.period
-    ? `${formatMonth(p.period.from, lang)}<br>｜<br>${p.period.to ? formatMonth(p.period.to, lang) : L.present}<br>（${formatDuration(p.period, lang)}）`
+    ? `${formatMonth(p.period.from, lang)}<br>｜<br>${p.period.to ? formatMonth(p.period.to, lang) : L.present}${formatDuration(p.period, lang) ? `<br>（${formatDuration(p.period, lang)}）` : ""}`
     : "";
 
   return `
@@ -164,6 +180,7 @@ function renderProject(p: LocalizedProject, lang: Lang): string {
         <td class="pj-period">${period}</td>
         <td>
           <div class="pj-title">■${esc(p.title)}</div>
+          ${p.url ? `<div class="small">${L.link}: ${esc(p.url)}</div>` : ""}
           ${p.overview ? `<div><span class="tag">【${L.overview}】</span><br>${escMultiline(p.overview)}</div>` : ""}
           ${p.phases?.length ? `<div><span class="tag">【${L.phases}】</span>${ul(p.phases, "plain")}</div>` : ""}
           ${p.tasks?.length ? `<div><span class="tag">【${L.tasks}】</span>${ul(p.tasks, "plain")}</div>` : ""}

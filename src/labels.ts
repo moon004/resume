@@ -42,6 +42,8 @@ const labels = {
     envDb: "DB",
     envOther: "その他ミドルウェア、サーバー等",
     excerptNote: "※主要な案件を抜粋して記載しております。",
+    sideProjects: "個人開発・その他活動",
+    link: "URL",
     certifications: "取得資格等",
     selfPr: "自己PR",
     end: "以上",
@@ -71,9 +73,9 @@ const labels = {
     licenses: "免許・資格",
     remarks: "備考",
     // web
-    webContact: "連絡先",
-    webProjects: "主なプロジェクト",
-    webTechnologies: "技術",
+    expertise: "専門領域",
+    experience: "職務経歴",
+    tech: "技術",
   },
   en: {
     asOf: "as of",
@@ -113,6 +115,8 @@ const labels = {
     envDb: "DB",
     envOther: "Other (middleware, servers)",
     excerptNote: "* Only major projects are listed.",
+    sideProjects: "Side Projects",
+    link: "URL",
     certifications: "Certifications",
     selfPr: "Self PR",
     end: "",
@@ -140,9 +144,9 @@ const labels = {
     workRecord: "Work history",
     licenses: "Licenses / Certifications",
     remarks: "Remarks",
-    webContact: "Contact",
-    webProjects: "Key projects",
-    webTechnologies: "Technologies",
+    expertise: "Expertise",
+    experience: "Experience",
+    tech: "Tech",
   },
 } as const;
 
@@ -154,15 +158,16 @@ export function getLabels(lang: Lang): Labels {
 
 const EN_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-export function splitYm(ym: string): { y: number; m?: number } {
+// "YYYY-MM" → {y, m}。"YYYY" → {y}。数値でなければ両方 undefined（TODO 等のプレースホルダー対策）
+export function splitYm(ym: string): { y?: number; m?: number } {
   const [y, m] = ym.split("-").map(Number);
-  return { y, m: m || undefined };
+  return { y: Number.isFinite(y) ? y : undefined, m: Number.isFinite(m) && m ? m : undefined };
 }
 
 // 2023-04 → 2023年4月 / Apr 2023
 export function formatMonth(ym: string, lang: Lang): string {
   const { y, m } = splitYm(ym);
-  if (!y) return ym;
+  if (y === undefined) return ym;
   if (!m) return String(y);
   return lang === "ja" ? `${y}年${m}月` : `${EN_MONTHS[m - 1]} ${y}`;
 }
@@ -179,11 +184,12 @@ export function formatToday(lang: Lang, today = new Date()): string {
   return `${L.asOf} ${today.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`;
 }
 
-// 期間の月数（両端含む）→ "1年3ヶ月" / "1 yr 3 mo"
+// 期間の月数（両端含む）→ "1年3ヶ月" / "1 yr 3 mo"。年のみの指定なら空文字
 export function formatDuration(p: Period, lang: Lang, today = new Date()): string {
   const a = splitYm(p.from);
   const b = p.to ? splitYm(p.to) : { y: today.getFullYear(), m: today.getMonth() + 1 };
-  const months = (b.y - a.y) * 12 + ((b.m ?? 1) - (a.m ?? 1)) + 1;
+  if (a.y === undefined || b.y === undefined || !a.m || !b.m) return "";
+  const months = (b.y - a.y) * 12 + (b.m - a.m) + 1;
   const y = Math.floor(months / 12);
   const m = months % 12;
   if (lang === "ja") return `${y ? `${y}年` : ""}${m ? `${m}ヶ月` : ""}` || "0ヶ月";
@@ -208,6 +214,7 @@ export function formatBirthDate(birthDate: string, lang: Lang, today = new Date(
 export interface TimelineRow {
   year?: number;
   month?: number;
+  raw?: string; // 元の日付文字列（YYYY-MM など）
   text: string;
   kind: "heading" | "entry" | "present" | "end" | "blank";
 }
@@ -220,7 +227,7 @@ export function buildTimeline(r: LocalizedResume, lang: Lang): TimelineRow[] {
     rows.push({ text: L.education, kind: "heading" });
     for (const e of r.education) {
       const { y, m } = splitYm(e.date);
-      rows.push({ year: y, month: m, text: e.name, kind: "entry" });
+      rows.push({ year: y, month: m, raw: e.date, text: e.name, kind: "entry" });
     }
     rows.push({ text: "", kind: "blank" });
   }
@@ -238,10 +245,10 @@ export function companyRows(c: LocalizedCompany, lang: Lang): TimelineRow[] {
   const leave = c.leaveLabel ?? L.left;
   const line = (verb: string) => (lang === "ja" ? `${c.name}　${verb}` : `${verb} ${c.name}`);
   const f = splitYm(c.period.from);
-  const rows: TimelineRow[] = [{ year: f.y, month: f.m, text: line(join), kind: "entry" }];
+  const rows: TimelineRow[] = [{ year: f.y, month: f.m, raw: c.period.from, text: line(join), kind: "entry" }];
   if (c.period.to) {
     const t = splitYm(c.period.to);
-    rows.push({ year: t.y, month: t.m, text: line(leave), kind: "entry" });
+    rows.push({ year: t.y, month: t.m, raw: c.period.to, text: line(leave), kind: "entry" });
   }
   return rows;
 }

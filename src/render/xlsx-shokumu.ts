@@ -1,6 +1,6 @@
 import ExcelJS from "exceljs";
 import { companyRows, formatDuration, formatMonth, formatPeriod, formatToday, getLabels } from "../labels.js";
-import type { Lang, LocalizedResume } from "../types.js";
+import type { Lang, LocalizedProject, LocalizedResume } from "../types.js";
 
 // 職務経歴書の Excel 出力。Word フォーマットの章立てとテーブル構成をそのままシートに展開する
 export async function renderShokumuXlsx(r: LocalizedResume, lang: Lang, outPath: string): Promise<void> {
@@ -62,7 +62,7 @@ export async function renderShokumuXlsx(r: LocalizedResume, lang: Lang, outPath:
 
   heading(L.career);
   for (const row of r.workHistory.flatMap((c) => companyRows(c, lang))) {
-    ws.addRow([formatMonth(`${row.year}-${row.month ?? ""}`, lang), row.text]);
+    ws.addRow([formatMonth(row.raw ?? "", lang), row.text]);
   }
   if (r.workHistory.some((c) => !c.period.to)) ws.addRow(["", L.toPresent]);
 
@@ -82,6 +82,42 @@ export async function renderShokumuXlsx(r: LocalizedResume, lang: Lang, outPath:
     ws.getCell(start, 1).alignment = { vertical: "middle", horizontal: "center", wrapText: true };
   }
 
+  // 開発経歴・個人開発で共通のプロジェクト行
+  const projectRow = (p: LocalizedProject) => {
+    const env = p.environment ?? {};
+    const period = p.period
+      ? `${formatMonth(p.period.from, lang)}\n｜\n${p.period.to ? formatMonth(p.period.to, lang) : L.present}${formatDuration(p.period, lang) ? `\n（${formatDuration(p.period, lang)}）` : ""}`
+      : "";
+    const body = [
+      `■${p.title}`,
+      p.url ? `${L.link}: ${p.url}` : "",
+      section(L.overview, p.overview ?? ""),
+      section(L.phases, bullets(p.phases)),
+      section(L.tasks, bullets(p.tasks)),
+      section(L.achievements, bullets(p.achievements)),
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const envText = [
+      section(L.envOs, (env.os ?? []).join(", ")),
+      section(L.envLanguages, (env.languages ?? []).join(", ")),
+      section(L.envFrameworks, (env.frameworks ?? []).join(", ")),
+      section(L.envDb, (env.db ?? []).join(", ")),
+      section(L.envOther, (env.other ?? []).join(", ")),
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const scale = [
+      p.teamSize ? `${L.team}：${p.teamSize}${L.people}` : "",
+      p.totalSize ? `${L.total}：${p.totalSize}${L.people}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const roleText = [section(L.role, p.role ?? ""), section(L.scale, scale)].filter(Boolean).join("\n");
+    const row = tableRow([period, body, envText, roleText]);
+    row.getCell(1).alignment = { horizontal: "center", vertical: "top", wrapText: true };
+  };
+
   heading(L.workHistory);
   for (const c of r.workHistory) {
     const head = ws.addRow([`${c.name}　（${L.employmentPeriod}：${formatPeriod(c.period, lang)}）`]);
@@ -97,42 +133,16 @@ export async function renderShokumuXlsx(r: LocalizedResume, lang: Lang, outPath:
       ws.mergeCells(m.number, 1, m.number, 4);
     }
     tableHeader([L.period, L.projectAndTasks, L.environment, L.roleScale]);
-    for (const p of c.projects) {
-      const env = p.environment ?? {};
-      const period = p.period
-        ? `${formatMonth(p.period.from, lang)}\n｜\n${p.period.to ? formatMonth(p.period.to, lang) : L.present}\n（${formatDuration(p.period, lang)}）`
-        : "";
-      const body = [
-        `■${p.title}`,
-        section(L.overview, p.overview ?? ""),
-        section(L.phases, bullets(p.phases)),
-        section(L.tasks, bullets(p.tasks)),
-        section(L.achievements, bullets(p.achievements)),
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const envText = [
-        section(L.envOs, (env.os ?? []).join(", ")),
-        section(L.envLanguages, (env.languages ?? []).join(", ")),
-        section(L.envFrameworks, (env.frameworks ?? []).join(", ")),
-        section(L.envDb, (env.db ?? []).join(", ")),
-        section(L.envOther, (env.other ?? []).join(", ")),
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const scale = [
-        p.teamSize ? `${L.team}：${p.teamSize}${L.people}` : "",
-        p.totalSize ? `${L.total}：${p.totalSize}${L.people}` : "",
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const roleText = [section(L.role, p.role ?? ""), section(L.scale, scale)].filter(Boolean).join("\n");
-      const row = tableRow([period, body, envText, roleText]);
-      row.getCell(1).alignment = { horizontal: "center", vertical: "top", wrapText: true };
-    }
+    for (const p of c.projects) projectRow(p);
     blank();
   }
   para(L.excerptNote);
+
+  if (r.sideProjects?.length) {
+    heading(L.sideProjects);
+    tableHeader([L.period, L.projectAndTasks, L.environment, L.roleScale]);
+    for (const p of r.sideProjects) projectRow(p);
+  }
 
   if (r.certifications?.length) {
     heading(L.certifications);

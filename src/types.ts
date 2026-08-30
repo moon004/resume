@@ -23,6 +23,7 @@ export interface Resume<S = L10n> {
   workHistory: Company<S>[]; // 開発経歴
   certifications?: { date: string; name: S }[]; // 取得資格等 / 免許・資格
   education?: { date: string; name: S }[]; // 学歴（入学・卒業を 1 行ずつ）
+  sideProjects?: Project<S>[]; // 個人開発・その他活動
   selfPr?: { title: S; body: S }[]; // 自己PR
   remarks?: S; // 履歴書の備考欄
 }
@@ -39,6 +40,7 @@ export interface Profile<S = L10n> {
   mobile?: string;
   email?: string;
   github?: string;
+  linkedin?: string;
   website?: string;
   spouse?: boolean;
   dependents?: number;
@@ -58,6 +60,7 @@ export interface Company<S = L10n> {
 
 export interface Project<S = L10n> {
   title: S;
+  url?: string; // 公開 URL（個人開発など）
   period?: Period;
   overview?: S; // プロジェクト概要
   phases?: S[]; // 担当フェーズ
@@ -79,7 +82,7 @@ export interface Environment {
 
 export interface SkillCategory<S = L10n> {
   category: S;
-  items: { name: string; years?: number; level?: S }[];
+  items: { name: S; years?: number; level?: S }[];
 }
 
 export type LocalizedResume = Resume<string>;
