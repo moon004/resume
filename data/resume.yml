@@ -12,7 +12,6 @@ profile:
     }
   # gender: { ja: "男", en: "Male" }   # TODO: 履歴書に記載する場合はコメントを外す
   birthDate: "1994-05-06"
-  postalCode: "062-0903"
   address: { ja: "北海道札幌市", en: "Sapporo, Hokkaido, Japan" }
   addressKana: "ほっかいどうさっぽろし"
   phone: ""
@@ -25,11 +24,13 @@ profile:
 # 職務要約（短く、要点のみ。web / 職務経歴書で共通。> で折り返すと 1 段落になる）
 summary:
   # 日本語は折り返しで空白が入るため 1 行で書く
-  ja: "2019年から Go・TypeScript を中心にフルスタックで Web プロダクトを開発してきたテックリード。顧客の課題を要件とアーキテクチャに落とし込み、5名のスクラムチームを率いてリリースまで導いてきました。現在はクリーンアーキテクチャに基づくマイクロサービスと、イベント駆動の DDD による大規模システム設計を担当しています。"
+  ja: "多言語（英・中・馬・日）で働けるフルスタックエンジニア。5名チームを率いてリリースまで導いた経験と、エンジニアリングマネジメント（EM）の知見を持ちます。DDD とクリーンアーキテクチャによるマイクロサービス設計、Kubernetes / Terraform でのインフラ運用に強みがあり、チーム全体の改善を日常的に主導。イベント計測から BigQuery での効果検証まで、プロダクト分析も一気通貫で行います。"
   en: >
-    Tech Lead and full-stack engineer who has been shipping web products in Go and TypeScript since 2019.
-    Turns customer problems into requirements and architecture, and has led a five-person Scrum team from kickoff to release.
-    Currently designing large-scale systems as event-driven DDD microservices on clean architecture.
+    Multilingual full-stack engineer who has led a five-person team to release and brings a working knowledge of
+    engineering management. Strong in DDD and clean-architecture microservice design on a Kubernetes stack, with
+    hands-on Terraform infrastructure experience, and a habit of taking the lead on team-wide improvements.
+    Covers product analytics end-to-end — event instrumentation into BigQuery through to the impact analysis
+    behind each ship decision.
 
 # 得意な分野・知識・技術
 strengths:
@@ -41,11 +42,15 @@ strengths:
     en: "Full-stack development: Go (Echo / sqlc) backends and TypeScript (React / Next.js) frontends"
   - ja: "フロントエンド・バックエンド双方のテスト設計と自動化（Cypress による E2E、CI 構築）"
     en: "Test design and automation across frontend and backend (Cypress E2E, CI pipelines)"
+  - ja: "A/B テストの一気通貫の実施 — イベントトリガー設計、BigQuery（Dataform）への計測基盤整備から、Variation / Control の採用判断の分析まで"
+    en: "End-to-end A/B testing — event-trigger design, the measurement pipeline into BigQuery (Dataform), and the analysis that decides whether to adopt variation or control"
+  - ja: "オブザーバビリティの整備 — Datadog のアラート・レポート設計、アラート対応フローの策定、サーバー / Web への SLI・SLO 設定"
+    en: "Observability — Datadog alerting and reporting, alert-handling workflows, and SLI/SLO definitions for server and web"
   - ja: "チームリーダー / テックリードとして最大5名規模のチームマネジメント（チケット駆動開発、スクラム・プランニングポーカー）と顧客折衝"
     en: "Team leadership of up to 5 engineers (ticket-based development, Scrum planning poker) and client communication"
   - ja: "開発者向け仕様書・ドキュメントの作成"
     en: "Writing specifications and developer-facing documentation"
-  - ja: "多言語でのコミュニケーション（英語・中国語・マレー語・日本語・韓国語・福建語）"
+  - ja: "多言語でのコミュニケーション（英語・中国語・マレー語・日本語）"
     en: "Multilingual communication (English, Mandarin, Malay, Japanese)"
 
 # テクニカルスキル（増えたら行を足すだけ）
@@ -90,8 +95,22 @@ skills:
       - {
           name:
             {
+              ja: "A/B テスト設計・効果検証（BigQuery / Dataform）",
+              en: "A/B test design & analysis (BigQuery / Dataform)",
+            },
+        }
+      - {
+          name:
+            {
               ja: "テックリード / チームマネジメント",
               en: "Tech leadership / team management",
+            },
+        }
+      - {
+          name:
+            {
+              ja: "エンジニアリングマネジメント（EM）の知見",
+              en: "Engineering management (EM)",
             },
         }
   - category: { ja: "言語", en: "Languages" }
@@ -110,8 +129,6 @@ skills:
       - { name: "Echo / sqlc (Go)" }
       - { name: Spring Boot }
       - { name: gRPC }
-      - { name: React-spring }
-      - { name: "Unity / Playmaker" }
   - category: DB
     items:
       - { name: PostgreSQL, years: 4 }
@@ -131,8 +148,10 @@ skills:
       - { name: Kubernetes }
       - { name: Terraform }
       - { name: Ansible }
-  - category: { ja: "CI / 監視", en: "CI / Monitoring" }
+  - category: { ja: "CI・オブザーバビリティ", en: "CI / Observability" }
     items:
+      - { name: "Datadog（アラート・レポート設計）" }
+      - { name: { ja: "SLI / SLO 設計・運用", en: "SLI / SLO design & operation" } }
       - { name: CircleCI }
       - { name: GitLab CI }
       - { name: GitHub Actions }
@@ -345,15 +364,16 @@ workHistory:
               ja: "店舗情報更新やジョブ実行を Slack コマンド化し、運用を効率化",
               en: "Turned store-data updates and job runs into Slack commands to streamline operations",
             }
+          - {
+              ja: "Datadog によるアラート・レポートとアラート対応フローを整備し、サーバー / Web に SLI・SLO を設定して運用品質を可視化",
+              en: "Set up Datadog alerting and reporting with an alert-handling workflow, and defined SLI/SLOs for the server and web to make operational quality visible",
+            }
         environment:
           languages: [Go]
           frameworks: [gRPC]
           db: [Cloud Spanner, BigQuery]
-          other: [GKE (Kubernetes), Cloud Run, Terraform, GitHub Actions]
-        role: {
-            ja: "ソフトウェアエンジニア（フルスタック）",
-            en: "Software Engineer (Full-stack)",
-          } # TODO: 正式な役職に合わせて修正
+          other: [GKE (Kubernetes), Cloud Run, Terraform, GitHub Actions, Datadog]
+        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
 
       - title:
           {
@@ -393,12 +413,8 @@ workHistory:
         environment:
           languages: [TypeScript, Go]
           frameworks: [React Native (Expo), Next.js, React]
-          other: [Firebase, GTM, A/B testing]
-        role:
-          {
-            ja: "ソフトウェアエンジニア（フルスタック）",
-            en: "Software Engineer (Full-stack)",
-          }
+          other: [Firebase, GTM, BigQuery (Dataform), A/B testing]
+        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
 
       - title:
           {
@@ -430,11 +446,7 @@ workHistory:
           languages: [TypeScript, Go]
           frameworks: [Next.js]
           db: [Cloud Spanner, BigQuery]
-        role:
-          {
-            ja: "ソフトウェアエンジニア（フルスタック）",
-            en: "Software Engineer (Full-stack)",
-          }
+        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
 
       - title:
           {
@@ -463,129 +475,8 @@ workHistory:
               en: "Built AI-assisted developer tooling, such as a skill that automatically compares implementations against Figma designs",
             }
         environment:
-          other: [GitHub Actions, ADR, AI tooling (Claude Code)]
-        role:
-          { ja: "リーダー（開発体制改善）", en: "Lead, process improvement" }
-
-# 個人開発・その他活動（職務経歴書の「開発経歴」の後、web の Side Projects に出力）
-sideProjects:
-  - title:
-      {
-        ja: "自主事業: 人手不足と労働力を結ぶマッチングサービス（単独創業）",
-        en: "Solo startup bridging the gap between workload and workforce",
-      }
-    period: { from: "2020-06", to: "2021-09" }
-    tasks:
-      - {
-          ja: "Go によるマイクロサービス（認証、画像ホスティング / 処理、WebSocket）を TDD で開発",
-          en: "TDD backend development in Go (microservices: authentication, image hosting/handling, WebSocket)",
-        }
-      - {
-          ja: "Docker でのデプロイと Kubernetes によるオーケストレーション",
-          en: "Docker deployment with Kubernetes orchestration",
-        }
-      - {
-          ja: "SEO を重視した Next.js（TypeScript）フロントエンド、React-spring によるレスポンシブ UI",
-          en: "Next.js (TypeScript) frontend with a focus on SEO; React-spring for a responsive app",
-        }
-      - {
-          ja: "Let's Encrypt / certbot による HTTPS 化、nginx をロードバランサとしたサーバー構築と独自ドメイン設定",
-          en: "HTTPS (Let's Encrypt / certbot), nginx as load balancer, custom domain",
-        }
-    environment:
-      languages: [Go, TypeScript]
-      frameworks: [Next.js, React-spring]
-      other: [Docker, Kubernetes, nginx, Let's Encrypt]
-    role: { ja: "創業者 / フルスタック", en: "Founder / Full-stack" }
-
-  - title:
-      {
-        ja: "音楽ストリーミング PWA「YouDeez」",
-        en: "Production-ready music streaming PWA, YouDeez",
-      }
-    url: "https://github.com/moon004/Go-deezer-downloader"
-    tasks:
-      - {
-          ja: "暗号化されたプレミアム楽曲 URL の暗号化 / 復号を含むフルスタック開発",
-          en: "Built the full stack, including URL encryption/decryption of encrypted premium music",
-        }
-      - {
-          ja: "OSS プロジェクトへのコントリビューション",
-          en: "Contributed to open-source projects and the GitHub community",
-        }
-      - {
-          ja: "AWS EC2 / S3 でのホスティング、CircleCI による CI",
-          en: "Hosted on AWS EC2 / S3; continuous integration with CircleCI",
-        }
-    environment:
-      languages: [Go, JavaScript]
-      other: [AWS EC2, AWS S3, CircleCI]
-
-  - title:
-      {
-        ja: "2D プラットフォーマーのインディーゲーム「The Little Stellar」",
-        en: "2D platformer indie game, The Little Stellar",
-      }
-    url: "https://twitter.com/Stayker_Studio"
-    period: { from: "2022" } # TODO: 継続中でなければ to を記入
-    tasks:
-      - {
-          ja: "プログラミング全体とゲームメカニクスの設計・実装を担当（Unity / Playmaker）",
-          en: "In charge of all programming and game mechanics (Unity / Playmaker)",
-        }
-      - {
-          ja: "SNS を中心としたマーケティング（SEM）に参画",
-          en: "Involved in marketing, especially SEM on social media",
-        }
-    environment:
-      languages: ["C#"]
-      frameworks: [Unity, Playmaker]
-
-  - title:
-      {
-        ja: "インディーモバイルゲーム開発（個人）",
-        en: "Independent mobile game developer",
-      }
-    url: "https://www.youtube.com/watch?v=OI98BV9LcC8"
-    period: { from: "2018", to: "2019" }
-    overview:
-      {
-        ja: "2年以上にわたりモバイルゲームを個人開発・リリース（トレーラーは URL 参照）",
-        en: "2+ years developing and releasing mobile games (trailer at the URL)",
-      }
-
-  - title:
-      {
-        ja: "小切手の手書き数字認識システム",
-        en: "Handwritten digit recognition for cheques",
-      }
-    url: "https://github.com/moon004/Handwritten-Recognition-AI-Method"
-    tasks:
-      - {
-          ja: "MNIST データセットを用いて自作モデルを設計・学習",
-          en: "Self-designed and self-trained model on the MNIST handwritten digit database",
-        }
-      - {
-          ja: "Android Studio でアプリ化",
-          en: "Built an Android app with Android Studio",
-        }
-    environment:
-      languages: [Python, Java]
-      other: [MNIST, Android Studio]
-
-  - title:
-      {
-        ja: "LSTM によるローカル宝くじシステムの偏り検証",
-        en: "LSTM model to assess the bias of a local jackpot system",
-      }
-    period: { from: "2019", to: "2019" }
-    tasks:
-      - {
-          ja: "過去の当選番号をスクレイピングし LSTM モデルに入力、損失を観察して偏りを検証",
-          en: "Scraped past winning numbers, fed them to an LSTM model and evaluated the loss",
-        }
-    environment:
-      languages: [Python]
+          other: [GitHub Actions, ADR, AI tooling]
+        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
 
 # 取得資格等 / 免許・資格
 # certifications:
@@ -614,10 +505,10 @@ selfPr:
     body:
       ja: "チームリーダーとしてタスク割り当てなどのリソース管理とクライアントとのコミュニケーションを担い、現在は5名のチームをスクラム（プランニングポーカー）とチケット駆動開発で運営しています。複数の AWS CDK プロジェクトの並行オーケストレーションなど、チーム横断の調整も担当しています。"
       en: "I have managed team resources and client communication as a team leader, and currently run a team of five with Scrum planning poker and ticket-based development, including orchestrating multiple AWS CDK projects in parallel."
-  - title: { ja: "自走して作り切る力", en: "Self-driven builder" }
+  - title: { ja: "データで意思決定し、運用まで見届ける", en: "Deciding with data, owning it in production" }
     body:
-      ja: "業務外でも、単独創業したスタートアップで Go のマイクロサービスと Next.js フロントエンドを TDD で構築し、Kubernetes へデプロイした経験や、音楽ストリーミング PWA・インディーゲーム・機械学習モデルの個人開発など、アイデアをプロダクトとして完成させてきました。"
-      en: "Outside work I have taken ideas all the way to shipped products: a solo startup built with TDD on Go microservices and a Next.js frontend deployed to Kubernetes, a music-streaming PWA, indie games, and machine-learning side projects."
+      ja: "施策はイベントトリガーの設計から BigQuery（Dataform）への計測基盤整備、Variation / Control の採用判断まで一気通貫で検証しています。リリース後も Datadog のアラート・レポートと SLI・SLO で運用品質を可視化し、作って終わりではなく成果と安定性まで責任を持つことを大切にしています。"
+      en: "I validate every initiative end-to-end — from event-trigger design and the measurement pipeline into BigQuery (Dataform) to the analysis that decides whether to adopt variation or control. After release I keep watch through Datadog alerting and SLI/SLOs, taking responsibility not just for shipping but for outcomes and stability."
 
 # 履歴書の備考欄
 remarks:
