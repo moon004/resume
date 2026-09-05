@@ -6,6 +6,7 @@ import { renderRirekishoXlsx } from "./render/xlsx-rirekisho.js";
 import { renderShokumuXlsx } from "./render/xlsx-shokumu.js";
 import { renderRirekisho } from "./templates/rirekisho.js";
 import { renderShokumu } from "./templates/shokumu.js";
+import { renderWebMd } from "./templates/web-md.js";
 import { renderWeb } from "./templates/web.js";
 import type { Doc, Lang, LocalizedResume } from "./types.js";
 
@@ -14,7 +15,7 @@ import type { Doc, Lang, LocalizedResume } from "./types.js";
 const { values } = parseArgs({
   options: {
     doc: { type: "string", default: "shokumu,rirekisho,web" },
-    format: { type: "string", default: "html,pdf,xlsx" },
+    format: { type: "string", default: "html,pdf,xlsx,md" },
     lang: { type: "string", default: "ja,en" },
     data: { type: "string", default: "data/resume.yml" },
     out: { type: "string", default: "out" },
@@ -22,7 +23,7 @@ const { values } = parseArgs({
 });
 
 const DOCS: Doc[] = ["shokumu", "rirekisho", "web"];
-const FORMATS = ["html", "pdf", "xlsx"] as const;
+const FORMATS = ["html", "pdf", "xlsx", "md"] as const;
 const LANGS: Lang[] = ["ja", "en"];
 
 const pick = <T extends string>(input: string, allowed: readonly T[], label: string): T[] =>
@@ -46,6 +47,9 @@ const xlsx: Partial<Record<Doc, (r: LocalizedResume, lang: Lang, out: string) =>
   shokumu: renderShokumuXlsx,
   rirekisho: renderRirekishoXlsx,
 };
+const md: Partial<Record<Doc, (r: LocalizedResume, lang: Lang) => string>> = {
+  web: renderWebMd,
+};
 
 mkdirSync(values.out, { recursive: true });
 
@@ -67,6 +71,10 @@ for (const lang of langs) {
     if (formats.includes("xlsx") && xlsx[doc]) {
       await xlsx[doc]!(resume, lang, `${base}.xlsx`);
       console.log(`wrote ${base}.xlsx`);
+    }
+    if (formats.includes("md") && md[doc]) {
+      writeFileSync(`${base}.md`, md[doc]!(resume, lang));
+      console.log(`wrote ${base}.md`);
     }
   }
 }

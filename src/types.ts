@@ -20,6 +20,7 @@ export interface Resume<S = L10n> {
   summary?: S; // 職務要約
   strengths?: S[]; // 得意な分野・知識・技術
   skills: SkillCategory<S>[]; // テクニカルスキル
+  softSkills?: S[]; // リーダーシップ・マネジメント・ソフトスキル（web レジュメ用）
   workHistory: Company<S>[]; // 開発経歴
   certifications?: { date: string; name: S }[]; // 取得資格等 / 免許・資格
   education?: { date: string; name: S }[]; // 学歴（入学・卒業を 1 行ずつ）
@@ -41,6 +42,7 @@ export interface Profile<S = L10n> {
   email?: string;
   github?: string;
   linkedin?: string;
+  blog?: string; // 技術ブログ
   website?: string;
   spouse?: boolean;
   dependents?: number;
@@ -82,7 +84,7 @@ export interface Environment {
 
 export interface SkillCategory<S = L10n> {
   category: S;
-  items: { name: S; years?: number; level?: S }[];
+  items: { name: S; years?: number; level?: S; emphasis?: "bold" | "light" }[];
 }
 
 export type LocalizedResume = Resume<string>;

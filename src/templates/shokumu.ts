@@ -1,6 +1,7 @@
 import { esc, escMultiline, FONT_STACK, ul } from "../html.js";
 import {
   companyRows,
+  sortByPeriodDesc,
   formatDuration,
   formatMonth,
   formatPeriod,
@@ -160,7 +161,7 @@ function renderCompany(c: LocalizedCompany, lang: Lang): string {
       <thead><tr>
         <th>${L.period}</th><th>${L.projectAndTasks}</th><th>${L.environment}</th><th>${L.roleScale}</th>
       </tr></thead>
-      <tbody>${c.projects.map((p) => renderProject(p, lang)).join("")}</tbody>
+      <tbody>${sortByPeriodDesc(c.projects).map((p) => renderProject(p, lang)).join("")}</tbody>
     </table>
   </div>`;
 }

@@ -15,9 +15,9 @@ npm run build -- --doc web --format html
 | ----------- | ------------------------------------------------------------ | ------ | ----- | ------ |
 | `shokumu`   | 職務経歴書 — Levtech engineer format (A4 portrait)              | ✓      | ✓     | ✓ (structured sheet) |
 | `rirekisho` | 履歴書 — Levtech Excel format (A4 landscape)                   | ✓      | ✓     | ✓ (fills `templates/rirekisho.xlsx`) |
-| `web`       | A4 résumé (Summary · Expertise · Experience), single-column  | ✓      | ✓     | –      |
+| `web`       | A4 résumé (Summary · Experience · Skills · Leadership), 2p max | ✓      | ✓ + `md` | –      |
 
-`--lang ja,en` (default both). Output files: `out/<doc>-<lang>.<ext>`.
+`--lang ja,en` (default both). Output files: `out/<doc>-<lang>.<ext>`. `--format md` also emits `web-<lang>.md` — a Markdown mirror of exactly what the PDF shows (same section order and bullet selection). The md is generated output: hand-edits belong in `data/resume.yml`, then rebuild.
 
 ## Updating your resume
 

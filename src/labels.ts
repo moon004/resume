@@ -73,7 +73,9 @@ const labels = {
     licenses: "免許・資格",
     remarks: "備考",
     // web
-    expertise: "専門領域",
+    expertise: "スキル",
+    skillsNote: "太字 = 得意なスタック",
+    softSkillsHeading: "リーダーシップ・マネジメント",
     experience: "職務経歴",
     tech: "技術",
   },
@@ -144,8 +146,10 @@ const labels = {
     workRecord: "Work history",
     licenses: "Licenses / Certifications",
     remarks: "Remarks",
-    expertise: "Expertise",
-    experience: "Experience",
+    expertise: "Skills",
+    skillsNote: "Bold — familiar stack",
+    softSkillsHeading: "Leadership & Soft Skills",
+    experience: "Work Experience",
     tech: "Tech",
   },
 } as const;
@@ -209,6 +213,11 @@ export function formatBirthDate(birthDate: string, lang: Lang, today = new Date(
   const age = calcAge(birthDate, today);
   if (lang === "ja") return `${y}年${m}月${d}日生（満${age}歳）`;
   return `${new Date(y, m - 1, d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} (age ${age})`;
+}
+
+// プロジェクトを期間の新しい順に並べる（期間なしは末尾）
+export function sortByPeriodDesc<T extends { period?: Period }>(items: T[]): T[] {
+  return [...items].sort((a, b) => (b.period?.from ?? "").localeCompare(a.period?.from ?? ""));
 }
 
 export interface TimelineRow {

@@ -1,5 +1,5 @@
 import ExcelJS from "exceljs";
-import { companyRows, formatDuration, formatMonth, formatPeriod, formatToday, getLabels } from "../labels.js";
+import { companyRows, formatDuration, formatMonth, formatPeriod, formatToday, getLabels, sortByPeriodDesc } from "../labels.js";
 import type { Lang, LocalizedProject, LocalizedResume } from "../types.js";
 
 // 職務経歴書の Excel 出力。Word フォーマットの章立てとテーブル構成をそのままシートに展開する
@@ -133,7 +133,7 @@ export async function renderShokumuXlsx(r: LocalizedResume, lang: Lang, outPath:
       ws.mergeCells(m.number, 1, m.number, 4);
     }
     tableHeader([L.period, L.projectAndTasks, L.environment, L.roleScale]);
-    for (const p of c.projects) projectRow(p);
+    for (const p of sortByPeriodDesc(c.projects)) projectRow(p);
     blank();
   }
   para(L.excerptNote);

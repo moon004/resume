@@ -19,17 +19,19 @@ profile:
   email: "herodotus94@gmail.com"
   github: "https://github.com/moon004"
   linkedin: "https://www.linkedin.com/in/oo-siang-hwa-0aa584129/"
+  blog: "https://zenn.dev/siang"
   website: "https://gitlab.com/moon004"
 
 # 職務要約（短く、要点のみ。web / 職務経歴書で共通。> で折り返すと 1 段落になる）
 summary:
   # 日本語は折り返しで空白が入るため 1 行で書く
-  ja: "多言語（英・中・馬・日）で働けるフルスタックエンジニア。5名チームを率いてリリースまで導いた経験と、エンジニアリングマネジメント（EM）の知見を持ちます。DDD とクリーンアーキテクチャによるマイクロサービス設計、Kubernetes / Terraform でのインフラ運用に強みがあり、チーム全体の改善を日常的に主導。イベント計測から BigQuery での効果検証まで、プロダクト分析も一気通貫で行います。"
+  ja: "多言語で働けるフルスタックエンジニア。5名チームを率いてリリースまで導いた経験と、エンジニアリングマネジメント（EM）の知見を持ちます。ユーザーのペインポイントを引き出し、DDD とクリーンアーキテクチャによるマイクロサービス設計で、偶有的複雑性（accidental complexity）を最小限に抑えたソリューションに落とし込むのが得意です。Kubernetes / Terraform でのインフラ運用やチーム全体の改善も主導し、イベント計測から BigQuery での効果検証まで、プロダクト分析を一気通貫で担います。"
   en: >
     Multilingual full-stack engineer who has led a five-person team to release and brings a working knowledge of
-    engineering management. Strong in DDD and clean-architecture microservice design on a Kubernetes stack, with
-    hands-on Terraform infrastructure experience, and a habit of taking the lead on team-wide improvements.
-    Covers product analytics end-to-end — event instrumentation into BigQuery through to the impact analysis
+    engineering management. Skilled at drawing out users' pain points and turning them into solutions that carry
+    the least possible accidental complexity, through DDD and clean-architecture microservice design on a
+    Kubernetes stack with hands-on Terraform experience. Regularly takes the lead on team-wide improvements, and
+    covers product analytics end-to-end — event instrumentation into BigQuery through to the impact analysis
     behind each ship decision.
 
 # 得意な分野・知識・技術
@@ -42,131 +44,96 @@ strengths:
     en: "Full-stack development: Go (Echo / sqlc) backends and TypeScript (React / Next.js) frontends"
   - ja: "フロントエンド・バックエンド双方のテスト設計と自動化（Cypress による E2E、CI 構築）"
     en: "Test design and automation across frontend and backend (Cypress E2E, CI pipelines)"
-  - ja: "A/B テストの一気通貫の実施 — イベントトリガー設計、BigQuery（Dataform）への計測基盤整備から、Variation / Control の採用判断の分析まで"
+  - ja: "イベントトリガー設計、BigQuery（Dataform）への計測基盤整備から Variation / Control の採用判断まで、A/B テストの一気通貫の実施"
     en: "End-to-end A/B testing — event-trigger design, the measurement pipeline into BigQuery (Dataform), and the analysis that decides whether to adopt variation or control"
-  - ja: "オブザーバビリティの整備 — Datadog のアラート・レポート設計、アラート対応フローの策定、サーバー / Web への SLI・SLO 設定"
+  - ja: "オブザーバビリティの整備（Datadog のアラートとレポートの設計、アラート対応フローの策定、サーバーと Web への SLI / SLO 設定）"
     en: "Observability — Datadog alerting and reporting, alert-handling workflows, and SLI/SLO definitions for server and web"
   - ja: "チームリーダー / テックリードとして最大5名規模のチームマネジメント（チケット駆動開発、スクラム・プランニングポーカー）と顧客折衝"
     en: "Team leadership of up to 5 engineers (ticket-based development, Scrum planning poker) and client communication"
   - ja: "開発者向け仕様書・ドキュメントの作成"
     en: "Writing specifications and developer-facing documentation"
-  - ja: "多言語でのコミュニケーション（英語・中国語・マレー語・日本語）"
-    en: "Multilingual communication (English, Mandarin, Malay, Japanese)"
+  - ja: "多言語でのコミュニケーション（英語と日本語はビジネスレベル、中国語とマレー語は日常会話レベル）"
+    en: "Multilingual communication — English and Japanese at business level; Mandarin and Malay at conversational level"
 
 # テクニカルスキル（増えたら行を足すだけ）
 # years は PDF 作成時点の値 → TODO: 現在の年数に更新。level は任意（例: 通常使用に問題なし / 調べながら作業可能）
 skills:
-  # - category: OS
-  #   items:
-  #     - { name: Linux, years: 0 }   # TODO
+  # emphasis: bold = 現職（カナリー）で日常的に使うスタック / light = 経験が浅いもの
   - category: { ja: "アーキテクチャ・設計", en: "Architecture & Design" }
     items:
-      - { name: { ja: "マイクロサービス", en: "Microservices" } }
-      - { name: { ja: "クリーンアーキテクチャ", en: "Clean Architecture" } }
-      - {
-          name:
-            { ja: "ドメイン駆動設計（DDD）", en: "Domain-Driven Design (DDD)" },
-        }
-      - {
-          name:
-            {
-              ja: "イベント駆動アーキテクチャ",
-              en: "Event-driven architecture",
-            },
-        }
-      - {
-          name:
-            {
-              ja: "要件定義・システム設計",
-              en: "Requirements & system design",
-            },
-        }
+      - { name: { ja: "マイクロサービス", en: "Microservices" }, emphasis: bold }
+      - { name: { ja: "クリーンアーキテクチャ", en: "Clean Architecture" }, emphasis: bold }
+      - { name: { ja: "ドメイン駆動設計（DDD）", en: "Domain-Driven Design (DDD)" }, emphasis: bold }
+      - { name: { ja: "イベント駆動アーキテクチャ", en: "Event-driven architecture" }, emphasis: bold }
+      - { name: { ja: "要件定義・システム設計", en: "Requirements & system design" } }
   - category: { ja: "開発プロセス", en: "Practices" }
     items:
-      - {
-          name:
-            {
-              ja: "スクラム（プランニングポーカー）",
-              en: "Scrum (planning poker)",
-            },
-        }
+      - { name: { ja: "Linear Method（原則・プラクティス）", en: "Linear Method (principles & practices)" }, emphasis: bold }
+      - { name: { ja: "DDD イベントストーミング", en: "DDD EventStorming" }, emphasis: bold }
       - { name: TDD }
       - { name: { ja: "チケット駆動開発", en: "Ticket-based development" } }
-      - {
-          name:
-            {
-              ja: "A/B テスト設計・効果検証（BigQuery / Dataform）",
-              en: "A/B test design & analysis (BigQuery / Dataform)",
-            },
-        }
-      - {
-          name:
-            {
-              ja: "テックリード / チームマネジメント",
-              en: "Tech leadership / team management",
-            },
-        }
-      - {
-          name:
-            {
-              ja: "エンジニアリングマネジメント（EM）の知見",
-              en: "Engineering management (EM)",
-            },
-        }
+      - { name: { ja: "A/B テスト設計・効果検証（BigQuery / Dataform）", en: "A/B test design & analysis (BigQuery / Dataform)" } }
   - category: { ja: "言語", en: "Languages" }
     items:
-      - { name: Go, years: 4 }
-      - { name: TypeScript, years: 4 }
-      - { name: JavaScript, years: 4 }
-      - { name: Java, years: 2.5 }
-      - { name: "C#", years: 2 }
-      - { name: Python, years: 2 }
+      - { name: Go, years: 4, emphasis: bold }
+      - { name: TypeScript, years: 4, emphasis: bold }
+      - { name: JavaScript, years: 4, emphasis: bold }
+      - { name: Java, years: 2.5, emphasis: light }
+      - { name: "C#", years: 2, emphasis: light }
+      - { name: Python, years: 2, emphasis: light }
   - category: { ja: "フレームワーク", en: "Frameworks" }
     items:
-      - { name: React, years: 4 }
-      - { name: "React Native (Expo)" }
-      - { name: Next.js }
-      - { name: "Echo / sqlc (Go)" }
-      - { name: Spring Boot }
+      - { name: React, years: 4, emphasis: bold }
+      - { name: "React Native (Expo)", emphasis: bold }
+      - { name: Next.js, emphasis: bold }
+      - { name: Spring Boot, emphasis: light }
       - { name: gRPC }
   - category: DB
     items:
-      - { name: PostgreSQL, years: 4 }
-      - { name: Cloud Spanner }
-      - { name: BigQuery }
+      - { name: PostgreSQL, years: 4, emphasis: bold }
+      - { name: Cloud Spanner, emphasis: bold }
+      - { name: BigQuery, emphasis: bold }
       - { name: DynamoDB }
-      - { name: "ScalarDB / ScalarDL" }
+      - { name: "ScalarDB / ScalarDL", emphasis: light }
   - category: { ja: "クラウド", en: "Cloud" }
     items:
-      - { name: "GCP (Cloud Spanner, BigQuery, Cloud Run, GKE)" }
-      - {
-          name: "AWS (CDK, Amplify, Copilot, Lambda, DynamoDB, ECR, ECS, EC2, S3, CodeCommit)",
-        }
+      - { name: "GCP (GKE, Cloud Run)", emphasis: bold }
+      - { name: "AWS (CDK, ECS, Lambda)" }
   - category: { ja: "コンテナ・IaC", en: "Containers / IaC" }
     items:
-      - { name: Docker, years: 4 }
-      - { name: Kubernetes }
-      - { name: Terraform }
-      - { name: Ansible }
+      - { name: Docker, years: 4, emphasis: bold }
+      - { name: Kubernetes, emphasis: bold }
+      - { name: Terraform, emphasis: bold }
+      - { name: Ansible, emphasis: bold }
   - category: { ja: "CI・オブザーバビリティ", en: "CI / Observability" }
     items:
-      - { name: "Datadog（アラート・レポート設計）" }
-      - { name: { ja: "SLI / SLO 設計・運用", en: "SLI / SLO design & operation" } }
-      - { name: CircleCI }
-      - { name: GitLab CI }
+      - { name: { ja: "Datadog（アラート・レポート設計）", en: "Datadog (alerting & reporting)" }, emphasis: bold }
+      - { name: { ja: "SLI / SLO 設計・運用", en: "SLI / SLO design & operation" }, emphasis: bold }
       - { name: GitHub Actions }
       - { name: Dependabot }
       - { name: Sentry.io }
   - category: { ja: "テスト", en: "Testing" }
     items:
       - { name: "Cypress (E2E)" }
-  - category: { ja: "設計・管理ツール", en: "Design / Management tools" }
-    items:
-      - { name: Figma }
-      - { name: Whimsical }
-      - { name: "GitHub / GitLab" }
-      - { name: Jira }
-      - { name: Notion }
+      - { name: "agent-device (mobile E2E)" }
+      - { name: { ja: "AI テストツール（agent-browser）", en: "AI testing tools (agent-browser)" } }
+
+# リーダーシップ・マネジメント・ソフトスキル（web レジュメの Leadership & Soft Skills 欄）
+softSkills:
+  - ja: "5名のスクラムチームを率い、プランニングポーカーとチケット駆動開発、タスク配分などのリソース管理を含めてリリースまで推進"
+    en: "Led a five-person Scrum team through to release — planning poker, ticket-based development, task allocation and resourcing"
+  - ja: "エンジニアリングマネジメント（EM）の知見"
+    en: "Working knowledge of engineering management (EM)"
+  - ja: "チーム全体の改善を日常的に主導（リポジトリのモノレポ統合、レビュー体制の再設計、リリースサイクル向上目標のリード）"
+    en: "Regularly takes the lead on team-wide improvements — monorepo consolidation, review-structure redesign, and the release-velocity goal"
+  - ja: "札幌のエンジニアコミュニティ「Sapporo IT Engineering Meetup」（メンバー100名以上）のオーナーとして運営 https://www.meetup.com/sapporo-it-engineering-meetup"
+    en: "Owner and organizer of the Sapporo IT Engineering Meetup, a community of 100+ engineers — https://www.meetup.com/sapporo-it-engineering-meetup"
+  - ja: "顧客やプロダクトオーナーとの折衝、要件のすり合わせ"
+    en: "Communicates directly with clients and product owners to pin requirements down before code is written"
+  - ja: "ADR や仕様書など、開発者が迷わない粒度のドキュメント作成"
+    en: "Writes ADRs, specs and documentation precise enough for developers to act on without back-and-forth"
+  - ja: "多言語コミュニケーション（英語と日本語はビジネスレベル、中国語とマレー語は日常会話レベル）"
+    en: "Multilingual — English and Japanese at business level; Mandarin and Malay conversational"
 
 # 開発経歴（古い順。新しい会社は末尾に追加。to を省略すると「現在」）
 workHistory:
@@ -185,7 +152,7 @@ workHistory:
           }
         period: { from: "2019-05", to: "2021-05" }
         overview:
-          ja: "クライアント企業向け DLT（分散台帳）プラットフォーム — 組み込み用 SDK とバックエンドシステム"
+          ja: "クライアント企業向け DLT（分散台帳）プラットフォームの組み込み用 SDK とバックエンドシステム"
           en: "DLT (distributed-ledger) platform for enterprise clients — integration SDKs and backend systems"
         phases: # TODO: 要確認
           - { ja: "詳細設計", en: "Detailed design" }
@@ -216,8 +183,8 @@ workHistory:
         environment: # TODO: 要確認
           languages: [Java, Go]
           frameworks: [Spring Boot, gRPC]
-          db: [ScalarDB, PostgreSQL]
-          other: [ScalarDL, Docker]
+          db: [PostgreSQL]
+          other: [Docker]
         role: { ja: "チームリーダー", en: "Team Leader" }
 
   - name: { ja: "株式会社イー・カムトゥルー", en: "E-ComeTrue Inc." }
@@ -314,8 +281,7 @@ workHistory:
           languages: [Go, TypeScript]
           frameworks: [Echo, sqlc, Next.js, React]
           db: [PostgreSQL, DynamoDB]
-          other:
-            [AWS CDK, ECS, Lambda, Amplify, Copilot, GitHub Actions, Cypress]
+          other: ["AWS (CDK, ECS, Lambda)", GitHub Actions, Cypress]
         role: { ja: "テックリード", en: "Tech Lead" }
         teamSize: 5
 
@@ -323,8 +289,8 @@ workHistory:
     period: { from: "2024-07" }
     business:
       {
-        ja: "不動産テック — 部屋探しアプリ「CANARY」（掲載物件数 約600万件）と不動産仲介向け CRM「CANARY Cloud」の開発・運営",
-        en: "Real-estate tech — the CANARY rental-search app (~6M listings) and CANARY Cloud CRM for brokers",
+        ja: "部屋探しアプリ「CANARY」（650万ダウンロード）を開発・運営",
+        en: "Real-estate tech — CANARY 6.5 million downloads",
       }
     projects:
       # 出典: SSK-TBD org の merged PR 308件（server / canary-web / canary-react-native / manifests / ops）と Linear (toC / MP) のプロジェクト履歴
@@ -335,7 +301,7 @@ workHistory:
           }
         period: { from: "2024-07" }
         overview:
-          ja: "SUUMO・LIFULL・Yahoo! 等の大手ポータルから物件データを取り込む Go マイクロサービス群（クリーンアーキテクチャ）の開発・運用"
+          ja: "SUUMO、LIFULL、Yahoo! などの大手ポータルから物件データを取り込む Go マイクロサービス群（クリーンアーキテクチャ）の開発・運用"
           en: "Built and ran the Go microservices (clean architecture) that ingest listing data from major portals such as SUUMO, LIFULL and Yahoo!"
         phases:
           - { ja: "要件定義", en: "Requirements" }
@@ -345,7 +311,7 @@ workHistory:
           - { ja: "運用保守", en: "Operations" }
         tasks:
           - {
-              ja: "新規ポータル連動をインターフェース定義からジョブルーター・Kubernetes CronJob・本番リリースまで一貫して主導",
+              ja: "新規ポータル連動を、インターフェース定義からジョブルーター、Kubernetes CronJob、本番リリースまで一貫して主導",
               en: "Led a new portal integration end-to-end — interface definition, job router, Kubernetes CronJobs, through to production release",
             }
           - {
@@ -357,23 +323,24 @@ workHistory:
               en: "Implemented pipeline steps that normalise listing data across portals, such as display building names",
             }
           - {
-              ja: "反響（送客）まわりの品質改善 — 外部送信する電話番号の正規化を恒久対応として設計・実装し、ボット反響のブロックも実装",
+              ja: "反響（送客）の品質改善を担当し、外部へ送信する電話番号を正規化する恒久対応と、ボット反響のブロックを実装",
               en: "Hardened the lead-delivery path — designed the permanent fix that normalises phone numbers sent to client systems, and blocked bot-generated inquiries",
+            }
+          - {
+              ja: "Datadog のアラートとレポート、アラート対応フローを整備し、サーバーと Web に SLI / SLO を設定して運用品質を可視化",
+              en: "Set up Datadog alerting and reporting with an alert-handling workflow, and defined SLI/SLOs for the server and web to make operational quality visible",
             }
           - {
               ja: "店舗情報更新やジョブ実行を Slack コマンド化し、運用を効率化",
               en: "Turned store-data updates and job runs into Slack commands to streamline operations",
             }
-          - {
-              ja: "Datadog によるアラート・レポートとアラート対応フローを整備し、サーバー / Web に SLI・SLO を設定して運用品質を可視化",
-              en: "Set up Datadog alerting and reporting with an alert-handling workflow, and defined SLI/SLOs for the server and web to make operational quality visible",
-            }
         environment:
           languages: [Go]
           frameworks: [gRPC]
           db: [Cloud Spanner, BigQuery]
-          other: [GKE (Kubernetes), Cloud Run, Terraform, GitHub Actions, Datadog]
-        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
+          other:
+            [GKE (Kubernetes), Cloud Run, Terraform, GitHub Actions, Datadog]
+        role: { ja: "ソフトウェアエンジニア（toC・toB プロダクト）", en: "Software Engineer (toC & toB products)" }
 
       - title:
           {
@@ -391,11 +358,11 @@ workHistory:
           - { ja: "テスト", en: "Testing" }
         tasks:
           - {
-              ja: "「人気の駅」機能をバックエンド（geo サービスの usecase / adapter / repository 層）からゲートウェイ API・アプリ UI まで単独で設計・実装し、A/B テストで Variation 採用",
+              ja: "「人気の駅」機能を geo サービス（usecase / adapter / repository 層）からゲートウェイ API、アプリ UI まで単独で設計・実装し、A/B テストで Variation が採用",
               en: "Built the popular-stations feature single-handedly from the geo microservice (usecase / adapter / repository layers) through the gateway API to the app UI; its A/B variation was adopted",
             }
           - {
-              ja: "市区町村名フィルター、検索条件の緩和提案、イチオシ物件ソート、物件画像ギャラリー刷新、駅口コミ表示など 10 以上の施策を A/B テスト付きで実装",
+              ja: "市区町村名フィルター、検索条件の緩和提案、イチオシ物件ソート、物件画像ギャラリーの刷新、駅口コミ表示など、A/B テストを伴う施策を 10 以上実装",
               en: "Shipped 10+ A/B-tested features including city-name filters, relaxed-search suggestions, recommended-listing sort, an image-gallery revamp and station reviews",
             }
           - {
@@ -403,18 +370,18 @@ workHistory:
               en: "Redesigned the web search-condition URLs (moving all conditions into the hash) and built the saved-search feature from API to data wiring",
             }
           - {
-              ja: "ディープリンク（ユニバーサルリンク）対応を iOS / Android のドメイン認識設定から実装",
+              ja: "ディープリンク（ユニバーサルリンク）対応を、iOS / Android のドメイン関連付け設定から実装",
               en: "Implemented deep linking (universal links), including the iOS / Android domain-association setup",
             }
           - {
-              ja: "GTM / Firebase のイベント設計・埋め込みで効果検証を可能にし、採用judgeまで運用",
+              ja: "GTM / Firebase のイベントを設計・実装して効果検証を可能にし、Variation / Control の採用判断まで運用",
               en: "Designed and embedded GTM / Firebase events so every experiment could be measured through to its adoption decision",
             }
         environment:
           languages: [TypeScript, Go]
           frameworks: [React Native (Expo), Next.js, React]
           other: [Firebase, GTM, BigQuery (Dataform), A/B testing]
-        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
+        role: { ja: "ソフトウェアエンジニア（toC・toB プロダクト）", en: "Software Engineer (toC & toB products)" }
 
       - title:
           {
@@ -431,22 +398,22 @@ workHistory:
               en: "Built large-scale sitemap generation by city and station, migrating its data source from BigQuery to Cloud Spanner",
             }
           - {
-              ja: "サイトマップの variation / control 構造を設計して SEO の A/B 検証を可能にした",
+              ja: "SEO の A/B 検証を可能にする variation / control 構造のサイトマップを設計",
               en: "Designed a variation / control sitemap structure that made SEO A/B experiments possible",
             }
           - {
-              ja: "物件一覧ページの INP を startTransition の適用などで改善",
-              en: "Improved INP on the listing page, e.g. by applying startTransition",
+              ja: "Web プロダクトの Core Web Vitals（INP、LCP、CLS）を改善（例: startTransition 適用による物件一覧ページの INP 短縮）",
+              en: "Improved the web product's Core Web Vitals (INP, LCP, CLS) — e.g. lifting INP on the listing page with startTransition",
             }
           - {
-              ja: "単一駅・市区町村の検索を物件一覧ページへ直接遷移させるなど、SEO ランディングの導線を改善",
+              ja: "単一の駅や市区町村での検索を物件一覧ページへ直接遷移させるなど、SEO ランディングの導線を改善",
               en: "Improved SEO landing flows, e.g. routing single-station / single-city searches straight to listing pages",
             }
         environment:
           languages: [TypeScript, Go]
           frameworks: [Next.js]
           db: [Cloud Spanner, BigQuery]
-        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
+        role: { ja: "ソフトウェアエンジニア（toC・toB プロダクト）", en: "Software Engineer (toC & toB products)" }
 
       - title:
           {
@@ -459,24 +426,24 @@ workHistory:
           en: "Led the team goal of standardising the development process to raise release velocity"
         tasks:
           - {
-              ja: "Marketplace 関連リポジトリのモノレポ統合と、それに伴うドキュメント・CODEOWNERS の再整備を主導",
-              en: "Drove the consolidation of the Marketplace repositories into a monorepo, reworking docs and CODEOWNERS along the way",
+              ja: "タスクの計画と進め方を見直す新しい運用を設計・導入し、チーム全体の生産性を底上げ",
+              en: "Devised and introduced a new way of planning and working through tasks that lifted the team's overall productivity",
             }
           - {
-              ja: "PR レビューを toC / toB サブチーム体制へ移行する運用ルール（ODR）を策定",
-              en: "Authored the operating rule (ODR) that moved PR reviews to a toC / toB sub-team structure",
+              ja: "AI を日常の開発で活用しやすいよう、チームの体制と開発フローを再構築",
+              en: "Restructured the team and its workflows so AI can be put to work easily in day-to-day development",
+            }
+          - {
+              ja: "DDD の知見をチーム運営に適用し、ドメイン境界（toC / toB）に沿って責務とレビュー体制を再編してマネジメントを改善",
+              en: "Applied DDD thinking to the team itself — organising ownership and reviews along domain boundaries (toC / toB) — and improved how the team is managed",
             }
           - {
               ja: "ADR による設計合意プロセスを実践し、社内用語辞典など開発ドキュメントを整備",
               en: "Practised ADR-based design decisions and curated internal engineering docs such as the company glossary",
             }
-          - {
-              ja: "Figma デザインと実装の差分を自動チェックする AI スキルなど、AI を使った開発支援ツールを整備",
-              en: "Built AI-assisted developer tooling, such as a skill that automatically compares implementations against Figma designs",
-            }
         environment:
           other: [GitHub Actions, ADR, AI tooling]
-        role: { ja: "ソフトウェアエンジニア", en: "Software Engineer" }
+        role: { ja: "ソフトウェアエンジニア（toC・toB プロダクト）", en: "Software Engineer (toC & toB products)" }
 
 # 取得資格等 / 免許・資格
 # certifications:
@@ -505,7 +472,11 @@ selfPr:
     body:
       ja: "チームリーダーとしてタスク割り当てなどのリソース管理とクライアントとのコミュニケーションを担い、現在は5名のチームをスクラム（プランニングポーカー）とチケット駆動開発で運営しています。複数の AWS CDK プロジェクトの並行オーケストレーションなど、チーム横断の調整も担当しています。"
       en: "I have managed team resources and client communication as a team leader, and currently run a team of five with Scrum planning poker and ticket-based development, including orchestrating multiple AWS CDK projects in parallel."
-  - title: { ja: "データで意思決定し、運用まで見届ける", en: "Deciding with data, owning it in production" }
+  - title:
+      {
+        ja: "データで意思決定し、運用まで見届ける",
+        en: "Deciding with data, owning it in production",
+      }
     body:
       ja: "施策はイベントトリガーの設計から BigQuery（Dataform）への計測基盤整備、Variation / Control の採用判断まで一気通貫で検証しています。リリース後も Datadog のアラート・レポートと SLI・SLO で運用品質を可視化し、作って終わりではなく成果と安定性まで責任を持つことを大切にしています。"
       en: "I validate every initiative end-to-end — from event-trigger design and the measurement pipeline into BigQuery (Dataform) to the analysis that decides whether to adopt variation or control. After release I keep watch through Datadog alerting and SLI/SLOs, taking responsibility not just for shipping but for outcomes and stability."
